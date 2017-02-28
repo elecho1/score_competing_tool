@@ -5,6 +5,8 @@ ja:
     password_confirmation: パスワード（再入力）
     user: ユーザー
     remember_me: 次回からパスワード入力を省く
+    user_id: ユーザーID
+    user_name: 名前
   date:
     abbr_day_names:
     - 日

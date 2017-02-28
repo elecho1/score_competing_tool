@@ -10,11 +10,10 @@
 
 <%= yield %>
 
-<!--
 <%# flash and notice for devise flash message %>
-<p><%#= notice %></p>
-<p><%#= alert %></p>
--->
+<p class="alert alert-notice"><%= notice %></p>
+<p class="alert alert-error"><%= alert %></p>
+
 
 </body>
 </html>

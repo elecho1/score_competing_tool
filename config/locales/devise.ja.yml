@@ -13,7 +13,8 @@ ja:
       invalid: '入力情報が間違っています'
       locked: "アカウントがロックされています。"
       last_attempt: "もう一回ログインに失敗したらアカウントがロックされます。"
-      not_found_in_database: "メールアドレスまたはパスワードが無効です。"
+      #not_found_in_database: "メールアドレスまたはパスワードが無効です。"
+      not_found_in_database: "ログインIDまたはパスワードが無効です。"
       timeout: "一定時間が経過したため、再度ログインが必要です"
       unauthenticated: "続けるには、ログインまたは登録（サインアップ）が必要です。"
       unconfirmed: "続ける前に、アカウントの確認をお願いします。"
