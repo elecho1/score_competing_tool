@@ -7,13 +7,13 @@
   <% end %>
   
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, placeholder: 'メールアドレス' %>
+    <%#= f.label :email %>
+    <%= f.email_field :email, autofocus: true, placeholder: :email %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off", placeholder: 'パスワード' %>
+    <%#= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: :password %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
