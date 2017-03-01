@@ -4,8 +4,22 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
+    <%= f.label :user_id %> (半角英数字)<br />
     <%= f.text_field :user_id, autofocus: true %>
+  </div>
+  <div>
+    ※ユーザーIDは公開されません
+  </div>
+
+  <div class="field">
+    <%= f.label :user_name %> (またはニックネーム)<br />
+    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "名前を公開しますか？" %> <br />
+    <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
+    <%= f.radio_button :open_user_name, false, checked: true, autofocus: true %>いいえ</br>
   </div>
 
   <div class="field">
@@ -25,6 +39,12 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "点数を一覧表に開示しますか？" %> <br />
+    <%= f.radio_button :open_score, true, autofocus: true %>はい</br>
+    <%= f.radio_button :open_score, false, checked: true, autofocus: true %>いいえ</br>
   </div>
 
   <div class="actions">

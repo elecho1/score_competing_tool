@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   #validation
   validates :user_id, presence: true, uniqueness: true, 
   format: {with: /\w*\z/}, 
-  length: {minimum: 2, maximum: 20}
+  length: {minimum: 2, maximum: 50}
+  validates :open_user_name, inclusion: {in: [true, false], message: "を選択して下さい"}
+  validates :open_score, inclusion: {in: [true, false], message: "を選択して下さい"}
+  validates :user_name, length: {maximum: 50, allow_blank: true}
 
 end
