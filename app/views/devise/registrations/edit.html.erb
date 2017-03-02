@@ -4,6 +4,25 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :user_id %> (半角英数字)<br />
+    <%= f.text_field :user_id, autofocus: true %>
+  </div>
+  <div>
+    ※ユーザーIDは公開されません
+  </div>
+
+  <div class="field">
+    <%= f.label :user_name %> (またはニックネーム)<br />
+    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "名前を公開しますか？" %> <br />
+    <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
+    <%= f.radio_button :open_user_name, false, autofocus: true %>いいえ</br>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -13,26 +32,33 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    新しい<%= f.label :password %> <i>(パスワードを変更しない場合は記入しないで下さい）)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
+    <%# if @minimum_password_length %>
+    <% if @validatable %>
       <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <em><%= @minimum_password_length %> 文字以上</em>
     <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    新しい<%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label "点数を一覧表に開示しますか？" %> <br />
+    <%= f.radio_button :open_score, true, autofocus: true %>はい</br>
+    <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <!-- <i>(we need your current password to confirm your changes)</i> --><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "修正" %>
   </div>
 <% end %>
 
@@ -40,4 +66,4 @@
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "戻る", :back %>
