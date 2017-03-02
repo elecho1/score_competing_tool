@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          #change authentication keys
          :authentication_keys => [:user_id]
-         
+
+  #association
+   
 
   #validation
   validates :user_id, presence: true, uniqueness: true, 
