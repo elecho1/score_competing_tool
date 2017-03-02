@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
          #change authentication keys
-         :authentication_keys => [:user_id]
+         :authentication_keys => [:user_key]
 
   #association
    
 
   #validation
-  validates :user_id, presence: true, uniqueness: true, 
+  validates :user_key, presence: true, uniqueness: true, 
   format: {with: /\w*\z/}, 
   length: {minimum: 2, maximum: 50}
   validates :open_user_name, inclusion: {in: [true, false], message: "を選択して下さい"}

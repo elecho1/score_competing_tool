@@ -6,7 +6,7 @@ ja:
     current_password: 現在のパスワード
     user: ユーザー
     remember_me: 次回からパスワード入力を省く
-    user_id: ユーザーID
+    user_key: ユーザーID
     user_name: 名前
     open_user_name: 名前の公開の可否
     open_score: 成績の公開の可否
