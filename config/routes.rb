@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:show]
+  #resources :users, only: [:show]
+  get 'users/profile' => 'users#profile'
   root 'static_pages#index'
   get 'index' => 'static_pages#index'
   get 'about' => 'static_pages#about'

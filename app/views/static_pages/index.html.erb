@@ -7,5 +7,6 @@
   <%= link_to "ログイン", new_user_session_path %></br>
 <% else %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> </br>
-  <%= link_to "アカウント情報修正", edit_user_registration_path %>
+  <%#= link_to "アカウント情報変更", edit_user_registration_path %>
+  <%= link_to "アカウント情報確認", users_profile_path %>
 <% end %>

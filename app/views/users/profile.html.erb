@@ -1,0 +1,36 @@
+<h2>アカウント情報</h2>
+<%= link_to "アカウント情報変更", edit_user_registration_path %>
+<table border=!>
+  <tr>
+    <td><%= t('attributes.user_id') %> </br>(※ユーザーIDは公開されません）</td>
+    <td><%= @user.user_id %></td>
+  </tr>
+  <tr>
+    <td><%= t('attributes.user_name') %></td>
+    <td><%= @user.user_name %></td>
+  </tr>
+  <tr>
+    <td><%= t('attributes.open_user_name') %></td>
+    <% if @user.open_user_name %>
+      <td><%= t('view.yess') %></td>
+    <% else %>
+      <td><%= t('view.noo') %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= t('attributes.email') %></td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td><%= t('attributes.password') %></td>
+    <td>********</td>
+  </tr>
+  <td><%= t('attributes.open_score') %></td>
+    <% if @user.open_score %>
+      <td><%= t 'view.yess' %></td>
+    <% else %>
+      <td><%= t('view.noo') %></td>
+    <% end %>
+  </tr>
+
+</table>
