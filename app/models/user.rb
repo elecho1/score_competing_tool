@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :authentication_keys => [:user_key]
 
   #association
-   
+  has_one :user_score, dependent: :delete_all  
 
   #validation
   validates :user_key, presence: true, uniqueness: true, 
