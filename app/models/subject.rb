@@ -4,6 +4,6 @@ class Subject < ActiveRecord::Base
   has_many :user_scores, through: :scores
 
   #validation
-  validates :key, legth: {maximum: true}, presence: true
+  validates :key, length: {maximum: 100}, presence: true
 
 end

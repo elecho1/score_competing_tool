@@ -1,0 +1,13 @@
+<%= form_for @myscore, url: {action: 'create'} do |f|%>
+  <% @subjects.each do |subject| %>
+    <%= f.fields_for :scores do |s| %>
+      <%= s.label :value, subject.key %>
+      <%= s.text_field :value, size: 8 %>
+
+      <%= s.hidden_field :subject_id, value: subject.id %>
+      <%= s.hidden_field :registered, value: true %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit "点数登録" %>
+<% end %>
