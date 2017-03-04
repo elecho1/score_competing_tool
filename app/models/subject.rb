@@ -5,5 +5,6 @@ class Subject < ActiveRecord::Base
 
   #validation
   validates :key, length: {maximum: 100}, presence: true
+  validates :weight, numericality: true
 
 end

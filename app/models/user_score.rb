@@ -10,7 +10,5 @@ class UserScore < ActiveRecord::Base
   validates :total_score, numericality: {only_integer: true}, presence: true
   validates :gpa, numericality: true
   validates :score_count, numericality: {only_integer: true}, presence: true
-
-  
   
 end
