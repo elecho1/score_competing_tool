@@ -1,0 +1,27 @@
+<%#= form_tag (myscore_path(current_user.user_score.id), method: "patch") do %>
+<%#= form_tag ({controller: :myscores, action: :update}, method: "patch") do %> 
+
+<%= form_tag({controller: :myscores, action: :update}, method: "patch") do %> 
+  <% @scores.each do |score| %>
+  <div>
+    <%= fields_for "score[]", score do |s| %>
+      <%= s.label :value, score.subject.key %>
+      <%= s.text_field :value, size: 8 %>
+      <%= s.label :registered, t('view.notregistered') %>
+      <%# for inverse check %>
+      <% if score.registered %>
+        <%= s.check_box :registered, {checked: false}, checked_value = "false", unchecked_value = "true" %>
+      <% else %>
+        <%= s.check_box :registered, {checked: true}, checked_value = "false", unchecked_value = "true" %>
+      <% end %>
+
+      <%#= s.check_box :registered, {}, checked_value = "false", unchecked_value = "true" %>
+
+      <%#= s.hidden_field :subject_id, value: subject.id %>
+      <%#= s.hidden_field :registered, value: true %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <%= submit_tag "点数更新" %>
+<% end %>

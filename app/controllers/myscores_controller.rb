@@ -13,11 +13,16 @@ class MyscoresController < ApplicationController
     #end
   end
 
+  # !!!!! バリデーション部要整形 !!!!
+
   def create
-    myscore = UserScore.new(user_score_params)
-    myscore.save!
-    myscore = update_user_score_info(myscore)
-    myscore.save!
+    myscore = UserScore.create(user_score_params)
+    update_user_score_info(myscore)
+    if myscore.errors.any? 
+      flash[:error_num] = myscore.errors.count
+      flash[:error_msgs] = myscore.errors.full_messages 
+      redirect_to new_myscore_path
+    end
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
     #@myscore.gpa = 0
@@ -27,6 +32,45 @@ class MyscoresController < ApplicationController
     #  @scores.push(new_score(subject, @myscore))
     #end
   end
+
+  def edit
+    @myscore = current_user.user_score
+    @subjects = Subject.all.order(:id)
+    @scores = @myscore.scores
+  end
+  
+  def update
+    myscore = current_user.user_score
+    @scores = myscore.scores
+    #binding.pry
+    scores_params.each do |key, value|
+      score = Score.find(key)
+      unless score.update(value)
+        update_user_score_info(myscore)
+        flash[:error_num] = score.errors.count + myscore.errors.count
+        flash[:error_msgs] = score.errors.full_messages + myscore.errors.full_messages 
+        redirect_to edit_myscore_path
+      end
+    end
+    unless update_user_score_info(myscore)
+      flash[:error_num] = myscore.errors.count
+      flash[:error_msgs] = myscore.errors.full_messages 
+      redirect_to edit_myscore_path
+    end
+
+    #binding.pry
+    #p = Score.update(scores_params.keys, scores_params.values)
+    #  binding.pry
+    #if p.valid?
+    #  myscore = update_user_score_info(myscore)
+    #  myscore.save!
+    #else 
+    #  render :edit
+    #end
+    
+  end
+
+
   
 
 
@@ -50,8 +94,8 @@ class MyscoresController < ApplicationController
     else     
       myscore.gpa = gpa_sum(scores)/myscore.score_count
     end
-    binding.pry
-    return myscore
+    #binding.pry
+    myscore.save
   end
   
   def gpa_sum(scores)
@@ -74,6 +118,17 @@ class MyscoresController < ApplicationController
   def user_score_params
     params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0)
   end
-  
 
+  def scores_params
+    #params.require(:score).map { |u| u.permit(:value) }
+    params.permit(score: [:value, :registered])[:score]
+  end
+  
+  #def scores_params
+  #  params.require(:score).map do |params|
+  #    ActionController::Parameters.new(params.to_hash).permit(:value, :id)
+  #  end
+  #end
+  
+  
 end

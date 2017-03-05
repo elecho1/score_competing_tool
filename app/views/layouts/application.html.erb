@@ -8,11 +8,22 @@
 </head>
 <body>
 
+<%# flash for scores %>
+<% unless flash[:error_num].blank? %>
+  <p class="alert alert-error"><%= flash[:error_num] %>件のエラーがあります。</p>
+<% end %>
+<% unless flash[:error_msgs].blank? %>
+  <% flash[:error_msgs].each do |msg| %>
+    <li class="alert alert-error"><%= msg %></li>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 <%# flash and notice for devise flash message %>
 <p class="alert alert-notice"><%= notice %></p>
 <p class="alert alert-error"><%= alert %></p>
+
 
 
 </body>
