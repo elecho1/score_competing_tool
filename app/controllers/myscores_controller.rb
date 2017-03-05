@@ -21,7 +21,7 @@ class MyscoresController < ApplicationController
     if myscore.errors.any? 
       flash[:error_num] = myscore.errors.count
       flash[:error_msgs] = myscore.errors.full_messages 
-      redirect_to new_myscore_path
+      redirect_to new_myscores_path
     end
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
@@ -49,13 +49,13 @@ class MyscoresController < ApplicationController
         update_user_score_info(myscore)
         flash[:error_num] = score.errors.count + myscore.errors.count
         flash[:error_msgs] = score.errors.full_messages + myscore.errors.full_messages 
-        redirect_to edit_myscore_path
+        redirect_to edit_myscores_path
       end
     end
     unless update_user_score_info(myscore)
       flash[:error_num] = myscore.errors.count
       flash[:error_msgs] = myscore.errors.full_messages 
-      redirect_to edit_myscore_path
+      redirect_to edit_myscores_path
     end
 
     #binding.pry

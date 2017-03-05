@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   get 'index' => 'static_pages#index'
   get 'about' => 'static_pages#about'
-  resources "myscores", path: 'users/myscores'
+  resource "myscores", path: 'users/myscores', except:[:destroy]
 
 
 
