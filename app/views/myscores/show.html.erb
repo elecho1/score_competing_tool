@@ -1,0 +1,22 @@
+<h2>アカウント情報</h2>
+<%= link_to "点数変更", edit_myscores_path %>
+<table border=!>
+  <tr>
+    <th>科目名</th>
+    <th>点数</th>
+    <th>順位</th>
+  </tr>
+  <% @scores.each do |score| %>
+    <tr>
+      <td><%= score.subject.key %></td>
+      <td><%= score.value %></td>
+      <% if score.registered %>
+      <% binding.pry %>
+        <td><%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中</td>
+      <% else %>
+        <td>未受講</td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>

@@ -70,6 +70,29 @@ class MyscoresController < ApplicationController
     
   end
 
+  def show
+    @myscore = current_user.user_score
+    @scores = @myscore.scores
+    @subjects = @myscore.subjects.order(:id)
+    @standings = Hash.new
+    @scores.each do |score|
+      if score.registered
+        #binding.pry
+        this_subject_scores = score.subject.scores.where(registered: true).order(value: :DESC)
+        stand_count = 1
+        this_subject_scores.each do |this_sub_score|
+          #binding.pry
+          if this_sub_score.value > score.value
+            stand_count += 1
+          else
+            break
+          end
+        end 
+        @standings[score.id] = {standing: stand_count, number: this_subject_scores.size}
+      end
+    end
+  end
+
 
   
 
