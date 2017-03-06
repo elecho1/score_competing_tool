@@ -36,16 +36,15 @@ class MyscoresController < ApplicationController
   def edit
     @myscore = current_user.user_score
     #@subjects = Subject.all.order(:id)
-    @scores = @myscore.scores.order(:subject_id)
+    @scores = @myscore.scores.order(:subject_id).includes(:subject)
   end
   
   def update
     myscore = current_user.user_score
     @scores = myscore.scores
-    #binding.pry
     scores_params.each do |key, value|
-      score = Score.find(key)
-      unless score.update(value)
+      score = @scores.find(key) #find使わずにSQL文節約可
+      unless score.update(value) #たぶん節約できない
         update_user_score_info(myscore)
         flash[:error_num] = score.errors.count + myscore.errors.count
         flash[:error_msgs] = score.errors.full_messages + myscore.errors.full_messages 
@@ -57,22 +56,11 @@ class MyscoresController < ApplicationController
       flash[:error_msgs] = myscore.errors.full_messages 
       redirect_to edit_myscores_path
     end
-
-    #binding.pry
-    #p = Score.update(scores_params.keys, scores_params.values)
-    #  binding.pry
-    #if p.valid?
-    #  myscore = update_user_score_info(myscore)
-    #  myscore.save!
-    #else 
-    #  render :edit
-    #end
-    
   end
 
   def show
     @myscore = current_user.user_score
-    @scores = @myscore.scores
+    @scores = @myscore.scores.includes(subject: :scores)
     @subjects = @myscore.subjects.order(:id)
     @standings = Hash.new
     @scores.each do |score|
@@ -94,19 +82,7 @@ class MyscoresController < ApplicationController
   end
 
 
-  
-
-
-
   private
-  #def new_score (subject, myscore)
-  #  score = Score.new
-  #  score.subject = subject
-  #  score.user_score = myscore
-  #  return score
-  #end
-
-
   def update_user_score_info(myscore)
     #current_user_score = current_user.user_score
     scores = myscore.scores.where(registered: true)

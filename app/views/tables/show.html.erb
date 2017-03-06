@@ -7,10 +7,8 @@
       <th><%= subject.key %> </th>
     <% end %>
   </tr>
-  <%# standing = 0 %>
   <% @user_scores.each_with_index do |user_score, idx| %>
     <tr>
-      <%# standing += 1 %>
       <td><%= idx + 1 %></td>
       
       <% if user_score.user.open_user_name %>
@@ -20,14 +18,30 @@
       <% end %>
 
       <% if user_score.user.open_score %>
-        <td><% user_score.total_score %></td>
+        <td><%= user_score.total_score %></td>
       <% else %>
         <td> - </td>
       <% end %>
 
       <% if user_score.user.open_score %>
-        <% user_score.scores.each do |score| %>
-
+        <%# user_score.scores.each do |score| %>
+        <% for subject_id in @subject_ids %>
+          <%##### to find_out the score which has the certain subject_id #####%>
+          <% this_score = "" %>
+          <% user_score.scores.each do |score|%>
+            <% if score.subject_id == subject_id %>
+              <% this_score = score %>
+              <% break %>
+            <% end %>
+          <% end %>
+          <%# score = user_score.scores.find_by(subject_id: subject_id) %>
+          <%##### finish #####%>
+          
+          <% if this_score.registered %>
+            <td><%= this_score.value %></td>
+          <% else %>
+            <td>未受講</td>
+          <% end %>
         <% end %>
       <% else %>
         <% @subjects.size.times do %>
