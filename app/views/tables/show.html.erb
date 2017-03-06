@@ -1,0 +1,40 @@
+<table border=!>
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>総合点数</th>
+    <% @subjects.each do |subject| %>
+      <th><%= subject.key %> </th>
+    <% end %>
+  </tr>
+  <%# standing = 0 %>
+  <% @user_scores.each_with_index do |user_score, idx| %>
+    <tr>
+      <%# standing += 1 %>
+      <td><%= idx + 1 %></td>
+      
+      <% if user_score.user.open_user_name %>
+        <td><%= user_score.user.user_name %></td>
+      <% else %>
+        <td> - </td>
+      <% end %>
+
+      <% if user_score.user.open_score %>
+        <td><% user_score.total_score %></td>
+      <% else %>
+        <td> - </td>
+      <% end %>
+
+      <% if user_score.user.open_score %>
+        <% user_score.scores.each do |score| %>
+
+        <% end %>
+      <% else %>
+        <% @subjects.size.times do %>
+          <td> - </td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>

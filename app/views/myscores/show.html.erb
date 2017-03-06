@@ -11,7 +11,6 @@
       <td><%= score.subject.key %></td>
       <td><%= score.value %></td>
       <% if score.registered %>
-      <% binding.pry %>
         <td><%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中</td>
       <% else %>
         <td>未受講</td>

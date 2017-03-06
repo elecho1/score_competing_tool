@@ -35,8 +35,8 @@ class MyscoresController < ApplicationController
 
   def edit
     @myscore = current_user.user_score
-    @subjects = Subject.all.order(:id)
-    @scores = @myscore.scores
+    #@subjects = Subject.all.order(:id)
+    @scores = @myscore.scores.order(:subject_id)
   end
   
   def update

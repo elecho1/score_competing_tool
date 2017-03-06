@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'index' => 'static_pages#index'
   get 'about' => 'static_pages#about'
   resource "myscores", path: 'users/myscores', except:[:destroy]
-
+  resource :table, only:[:show]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
