@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- used Honoka as Bootstrap thema -->
 <html>
 <head>
   <title>ScoreCompetingTool</title>
@@ -6,8 +7,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
+<body class="no-thank-yu">
+  <header>
+    <!-- Nav Bar -->
+    <%= render partial: 'layouts/navbar' %>
+    
+  </header>
 <%# flash for scores %>
 <% unless flash[:error_num].blank? %>
   <p class="alert alert-error"><%= flash[:error_num] %>件のエラーがあります。</p>

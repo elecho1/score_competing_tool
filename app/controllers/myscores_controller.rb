@@ -21,7 +21,8 @@ class MyscoresController < ApplicationController
     if myscore.errors.any? 
       flash[:error_num] = myscore.errors.count
       flash[:error_msgs] = myscore.errors.full_messages 
-      redirect_to new_myscores_path
+      #redirect_to new_myscores_path
+      render :new
     end
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
@@ -43,18 +44,20 @@ class MyscoresController < ApplicationController
     myscore = current_user.user_score
     @scores = myscore.scores
     scores_params.each do |key, value|
-      score = @scores.find(key) #find使わずにSQL文節約可
-      unless score.update(value) #たぶん節約できない
+      @score = @scores.find(key) #find使わずにSQL文節約可
+      unless @score.update(value) #たぶん節約できない
         update_user_score_info(myscore)
-        flash[:error_num] = score.errors.count + myscore.errors.count
-        flash[:error_msgs] = score.errors.full_messages + myscore.errors.full_messages 
-        redirect_to edit_myscores_path
+        flash[:error_num] = @score.errors.count + myscore.errors.count
+        flash[:error_msgs] = @score.errors.full_messages + myscore.errors.full_messages 
+        #redirect_to edit_myscores_path
+        render :edit
       end
     end
     unless update_user_score_info(myscore)
       flash[:error_num] = myscore.errors.count
       flash[:error_msgs] = myscore.errors.full_messages 
-      redirect_to edit_myscores_path
+      #redirect_to edit_myscores_path
+      render :edit
     end
   end
 

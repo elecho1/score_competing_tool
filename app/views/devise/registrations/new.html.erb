@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :user_key %> (半角英数字)<br />
-    <%= f.text_field :user_key, autofocus: true %>
+    <%= f.text_field :user_key, autofocus: true, class: "form-control" %>
   </div>
   <div>
     ※ユーザーIDは公開されません
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :user_name %> (またはニックネーム)<br />
-    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）" %>
+    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）", class: "form-control" %>
   </div>
 
   <div class="field">
@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -33,12 +33,12 @@
     <% if @validatable %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field">
