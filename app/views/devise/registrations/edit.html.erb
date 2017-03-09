@@ -1,19 +1,31 @@
 <h2>アカウント情報変更 <%#= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <% if notice %>
+  <p class="alert alert-notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
 
+  <%#= devise_error_messages! %>
+  
+<%#= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+<%#= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
+  <%# binding.pry %>
   <div class="field">
-    <%= f.label :user_key %> (半角英数字)<br />
-    <%= f.text_field :user_key, autofocus: true %>
+    <%= f.label :user_key, class: "control-label" %> (半角英数字)<br />
+    <%= f.text_field :user_key, autofocus: true, class: "form-control" %>
   </div>
   <div>
     ※ユーザーIDは公開されません
   </div>
 
   <div class="field">
-    <%= f.label :user_name %> (またはニックネーム)<br />
-    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）" %>
+    <%= f.label :user_name, class: "control-label" %> (またはニックネーム)<br />
+    <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）", class: "form-control" %>
   </div>
 
   <div class="field">
@@ -23,8 +35,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.label :email, class: "control-label" %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -32,8 +44,8 @@
   <% end %>
 
   <div class="field">
-    新しい<%= f.label :password %> <i>(パスワードを変更しない場合は記入しないで下さい）)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    新しい<%= f.label :password, class: "control-label" %> <i>(パスワードを変更しない場合は記入しないで下さい）)</i><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
     <%# if @minimum_password_length %>
     <% if @validatable %>
       <br />
@@ -42,8 +54,8 @@
   </div>
 
   <div class="field">
-    新しい<%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    新しい<%= f.label :password_confirmation, class: "control-label" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field">
@@ -53,8 +65,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <!-- <i>(we need your current password to confirm your changes)</i> --><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <%= f.label :current_password, class: "control-label" %> <!-- <i>(we need your current password to confirm your changes)</i> --><br />
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="actions">

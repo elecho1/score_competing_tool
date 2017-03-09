@@ -23,5 +23,10 @@ module ScoreCompetingTool
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # change the field_error_prog's HTML tag to <span> instead of <div>
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      "<span class='field_with_errors'>#{html_tag}</span>".html_safe
+    end
   end
 end
