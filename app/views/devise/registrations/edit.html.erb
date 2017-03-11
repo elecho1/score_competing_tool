@@ -1,14 +1,9 @@
 <h2>アカウント情報変更 <%#= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <% if notice %>
-  <p class="alert alert-notice"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-error"><%= alert %></p>
-<% end %>
 
-  <%#= devise_error_messages! %>
+<% binding.pry %>
+  <%= devise_error_messages! %>
   
 <%#= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
 <%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
