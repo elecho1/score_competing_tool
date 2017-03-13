@@ -39,4 +39,25 @@ module DeviseHelper
     resource.errors.empty? ? false : true
   end
 
+  def devise_error_one(key)
+    return "" until resource.errors.messages[key]
+    
+    html = ""
+    html += <<-BOF
+    <div class="alert alert-danger alert-dismissible" role="alert">
+    BOF
+
+    resource.errors.messages[key].each do |msg|
+      html += <<-IOF
+        <div>#{I18n.t("attributes.#{key}")}#{msg}</div>
+      IOF
+    end
+    html += <<-EOF
+    </div>
+    EOF
+    
+    html.html_safe
+
+  end
+  
 end
