@@ -1,0 +1,14 @@
+<%# flash for scores %>
+<% unless flash[:error_num].blank? %>
+  <div class="alert alert-danger">
+    <%= flash[:error_num] %>件のエラーがあります。
+    <%# messages %>
+    <% unless flash[:error_msgs].blank? %>
+      <ul>
+      <% flash[:error_msgs].each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

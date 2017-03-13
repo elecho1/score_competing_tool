@@ -13,17 +13,6 @@
     <%= render partial: 'layouts/navbar' %>
     
   </header>
-<%# flash for scores %>
-<% unless flash[:error_num].blank? %>
-  <span class="has-error">
-  <p class="control-label"><%= flash[:error_num] %>件のエラーがあります。</p>
-  </span>
-<% end %>
-<% unless flash[:error_msgs].blank? %>
-  <% flash[:error_msgs].each do |msg| %>
-    <li class="alert alert-danger"><%= msg %></li>
-  <% end %>
-<% end %>
 
 <%= yield %>
 

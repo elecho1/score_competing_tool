@@ -1,9 +1,12 @@
 <%#= form_tag (myscore_path(current_user.user_score.id), method: "patch") do %>
 <%#= form_tag ({controller: :myscores, action: :update}, method: "patch") do %> 
 
+<%# flash errors for scores %>
+<%= render partial: 'layouts/scores_errors' %>
+
 <%= form_tag({controller: :myscores, action: :update}, method: "patch") do %> 
   <% @scores.each do |score| %>
-  <div>
+  <div class="field">
     <%= fields_for "score[]", score do |s| %>
       <%= s.label :value, score.subject.key %>
       <%= s.text_field :value, size: 8 %>

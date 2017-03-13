@@ -16,12 +16,13 @@ class MyscoresController < ApplicationController
   # !!!!! バリデーション部要整形 !!!!
 
   def create
-    myscore = UserScore.create(user_score_params)
-    update_user_score_info(myscore)
-    if myscore.errors.any? 
-      flash[:error_num] = myscore.errors.count
-      flash[:error_msgs] = myscore.errors.full_messages 
+    @myscore = UserScore.create(user_score_params)
+    update_user_score_info(@myscore)
+    if @myscore.errors.any? 
+      flash[:error_num] = @myscore.errors.count
+      flash[:error_msgs] = @myscore.errors.full_messages 
       #redirect_to new_myscores_path
+      @subjects = Subject.all.order(:id)
       render :new
     end
     #@myscore = UserScore.new.()
