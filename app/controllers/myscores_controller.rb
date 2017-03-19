@@ -37,27 +37,20 @@ class MyscoresController < ApplicationController
 
   def edit
     @myscore = current_user.user_score
+    #@myscore.scores.build
     #@subjects = Subject.all.order(:id)
     @scores = @myscore.scores.order(:subject_id).includes(:subject)
   end
   
   def update
-    myscore = current_user.user_score
-    @scores = myscore.scores
-    scores_params.each do |key, value|
-      @score = @scores.find(key) #find使わずにSQL文節約可
-      unless @score.update(value) #たぶん節約できない
-        update_user_score_info(myscore)
-        flash[:error_num] = @score.errors.count + myscore.errors.count
-        flash[:error_msgs] = @score.errors.full_messages + myscore.errors.full_messages 
-        #redirect_to edit_myscores_path
-        render :edit
-      end
-    end
-    unless update_user_score_info(myscore)
-      flash[:error_num] = myscore.errors.count
-      flash[:error_msgs] = myscore.errors.full_messages 
-      #redirect_to edit_myscores_path
+    @myscore = current_user.user_score
+        #binding.pry
+    @myscore.update(scores_params)
+    if @myscore.errors.any? 
+      flash[:error_num] = @myscore.errors.count
+      flash[:error_msgs] = @myscore.errors.full_messages 
+      #redirect_to new_myscores_path
+      @subjects = Subject.all.order(:id)
       render :edit
     end
   end
@@ -124,7 +117,8 @@ class MyscoresController < ApplicationController
 
   def scores_params
     #params.require(:score).map { |u| u.permit(:value) }
-    params.permit(score: [:value, :registered])[:score]
+    #params.permit(score: [:value, :registered])[:score]
+    params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered, :id])
   end
   
   #def scores_params

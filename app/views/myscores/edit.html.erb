@@ -4,27 +4,28 @@
 <%# flash errors for scores %>
 <%= render partial: 'layouts/scores_errors' %>
 
-<%= form_tag({controller: :myscores, action: :update}, method: "patch") do %> 
-  <% @scores.each do |score| %>
-  <div class="field">
-    <%= fields_for "score[]", score do |s| %>
-      <%= s.label :value, score.subject.key %>
-      <%= s.text_field :value, size: 8 %>
-      <%= s.label :registered, t('view.notregistered') %>
-      <%# for inverse check %>
-      <% if score.registered %>
-        <%= s.check_box :registered, {checked: false}, checked_value = "false", unchecked_value = "true" %>
-      <% else %>
-        <%= s.check_box :registered, {checked: true}, checked_value = "false", unchecked_value = "true" %>
-      <% end %>
 
-      <%#= s.check_box :registered, {}, checked_value = "false", unchecked_value = "true" %>
+<%= form_for @myscore, url: {action: 'update'} do |f|%>
 
-      <%#= s.hidden_field :subject_id, value: subject.id %>
-      <%#= s.hidden_field :registered, value: true %>
-    <% end %>
-  </div>
+  <%= f.fields_for :scores do |s| %>
+    <%# @subjects.each do |subject| %>
+      <div class="field">
+        <%# binding.pry %>
+        <%= s.label :value, s.object.subject.key, class: "control-label" %>
+        <%= s.text_field :value, size: 8, class: "form-control" %>
+        <%= s.label :registered, t('view.notregistered'), class: "control-label" %>
+        <% if s.object.registered %>
+          <%= s.check_box :registered, {checked: false}, checked_value = "false", unchecked_value = "true" %>
+        <% else %>
+          <%= s.check_box :registered, {checked: true}, checked_value = "false", unchecked_value = "true" %>
+        <% end %>
+
+        <%= s.hidden_field :subject_id, value: s.object.subject.id %>
+      </div>
+    <%# end %>
   <% end %>
 
-  <%= submit_tag "点数更新" %>
+  <%= f.submit "点数更新" %>
 <% end %>
+
+

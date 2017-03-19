@@ -1,0 +1,21 @@
+.navbar {
+  min-height: 40px;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: 15px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+}
+
+.navbar-brand {
+  float: left;
+  height: 70px;
+  padding: 23px 15px;
+  font-size: 20px;
+  line-height: 24px;
+}
