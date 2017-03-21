@@ -15,15 +15,18 @@
   </header>
 
 <div class="container">
-<div class="row">
+
 <%= yield %>
-</div>
+
 </div>
 
 <%# flash and notice for devise flash message %>
-<p class="alert alert-info"><%= notice %></p>
-<p class="alert alert-danger"><%= alert %></p>
-
+<% if notice %>
+  <p class="alert alert-info"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
 
 
 </body>

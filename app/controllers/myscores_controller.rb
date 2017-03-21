@@ -1,5 +1,9 @@
 class MyscoresController < ApplicationController
   #callback
+  before_action :registered_scores?, except: :new
+
+
+
   def new
     @myscore = UserScore.new
     @myscore.scores.build
@@ -126,6 +130,12 @@ class MyscoresController < ApplicationController
   #    ActionController::Parameters.new(params.to_hash).permit(:value, :id)
   #  end
   #end
-  
+
+  def registered_scores?
+    if current_user.user_score.blank?
+      redirect_to please_register_your_scores_path
+      return
+    end
+  end
   
 end

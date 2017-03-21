@@ -4,7 +4,7 @@ module DeviseHelper
 
     html = ""
     html += <<-BOF1
-    <div class="alert alert-danger alert-dismissible" role="alert">
+    <div class="alert alert-danger" role="alert">
     BOF1
 
     sentence = I18n.t("errors.messages.not_saved", count: resource.errors.count, resource: I18n.t("attributes.#{resource.class.model_name.i18n_key}"))
@@ -40,11 +40,11 @@ module DeviseHelper
   end
 
   def devise_error_one(key)
-    return "" until resource.errors.messages[key]
+    return "" if resource.errors.messages[key].blank?
     
     html = ""
     html += <<-BOF
-    <div class="alert alert-danger alert-dismissible" role="alert">
+    <div class="alert alert-danger" role="alert">
     BOF
 
     resource.errors.messages[key].each do |msg|

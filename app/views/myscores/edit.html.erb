@@ -5,6 +5,8 @@
 <%= render partial: 'layouts/scores_errors' %>
 
 
+<%# binding.pry %>
+
 <%= form_for @myscore, url: {action: 'update'} do |f|%>
 
   <%= f.fields_for :scores do |s| %>

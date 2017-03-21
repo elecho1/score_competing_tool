@@ -9,11 +9,13 @@
   <div class="field">
     <%#= f.label :email %>
     <%= f.text_field :user_key, autofocus: true, placeholder: :user_key %>
+    <%= devise_error_one(:user_key) %>
   </div>
 
   <div class="field">
     <%#= f.label :password %>
     <%= f.password_field :password, autocomplete: "off", placeholder: :password %>
+    <%= devise_error_one(:password) %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
