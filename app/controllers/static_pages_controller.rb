@@ -9,10 +9,4 @@ class StaticPagesController < ApplicationController
 
   end
 
-  private
-  # Don't check whether the user was authenticated
-  def use_before_action?
-    false
-  end
-
 end

@@ -1,5 +1,6 @@
 class MyscoresController < ApplicationController
   #callback
+  before_action :authenticate_user!
   before_action :registered_scores?, except: :new
 
 
