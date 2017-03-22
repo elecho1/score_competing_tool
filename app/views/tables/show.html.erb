@@ -1,4 +1,6 @@
-<table border=!>
+<h2>みんなの点数</h2>
+<table class="table table-hover table-striped table-bordered table-bordered-darkgray">
+  <thead>
   <tr>
     <th>順位</th>
     <th>名前</th>
@@ -7,9 +9,12 @@
       <th><%= subject.key %> </th>
     <% end %>
   </tr>
+  </thead>
+
+  <tbody>
   <% @user_scores.each_with_index do |user_score, idx| %>
     <tr>
-      <td><%= idx + 1 %></td>
+      <th><%= idx + 1 %></td>
       
       <% if user_score.user.open_user_name %>
         <td><%= user_score.user.user_name %></td>
@@ -50,5 +55,6 @@
       <% end %>
     </tr>
   <% end %>
+  </tbody>
 
 </table>

@@ -34,3 +34,24 @@
 .navbar-collapse {
   max-height: 500px;
 }
+
+.table-bordered-darkgray {
+  border: 1px solid darkgray !important;
+}
+.table-bordered-darkgray th,
+.table-bordered-darkgray td {
+  border: 1px solid darkgray !important;
+}
+
+
+.table-bordered-gray {
+  border: 1px solid gray !important;
+}
+.table-bordered-gray th,
+.table-bordered-gray td {
+  border: 1px solid gray !important;
+}
+
+
+
+body { padding-top: 80px; }

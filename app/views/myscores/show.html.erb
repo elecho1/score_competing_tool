@@ -1,12 +1,16 @@
-<h2>アカウント情報</h2>
-<%= link_to "点数変更", edit_myscores_path %>
-<table border=!>
-  <tr>
+<h2>自分の点数</h2>
+
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+  <tr class="text-center">
     <th>科目名</th>
     <th>点数</th>
     <th>順位</th>
     <th></th>
   </tr>
+  </thead>
+
+  <tbody>
   <% @scores.each do |score| %>
     <tr>
       <td><%= score.subject.key %></td>
@@ -20,9 +24,13 @@
         </td>
       <% else %>
         <td>未受講</td>
-        <td></td>
+        <td>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="私は<%= score.subject.key %>は未受講でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </td>
       <% end %>
     </tr>
   <% end %>
-
+  <tbody>
 </table>
+
+<%= link_to "点数更新", edit_myscores_path, class:"btn btn-info" %>

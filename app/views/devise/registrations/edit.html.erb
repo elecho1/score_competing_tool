@@ -8,29 +8,27 @@
 <%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
 <%#= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :user_key, class: "control-label" %> (半角英数字)<br />
     <%= f.text_field :user_key, autofocus: true, class: "form-control" %>
-  </div>
-  <div>
-    ※ユーザーIDは公開されません
+    <p>※ユーザーIDは公開されません</p>
   </div>
   <%= devise_error_one(:user_key) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :user_name, class: "control-label" %> (またはニックネーム)<br />
     <%= f.text_field :user_name, autofocus: true, placeholder: "（匿名可）", class: "form-control" %>
   </div>
   <%= devise_error_one(:user_name) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label "名前を公開しますか？", class: "control-label" %> <br />
     <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
     <%= f.radio_button :open_user_name, false, autofocus: true %>いいえ</br>
   </div>
   <%= devise_error_one(:open_user_name) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email, class: "control-label" %><br />
     <%= f.email_field :email, autofocus: true, class: "form-control" %>
   </div>
@@ -40,7 +38,7 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password, "新しいパスワード", class: "control-label" %> (パスワードを変更しない場合は記入しないで下さい）<br />
     <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
     <%# if @minimum_password_length %>
@@ -51,20 +49,20 @@
   </div>
   <%= devise_error_one(:password) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation, "新しいパスワード（再入力）", class: "control-label" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
   <%= devise_error_one(:password_confirmation) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label "点数を一覧表に開示しますか？" %> <br />
     <%= f.radio_button :open_score, true, autofocus: true %>はい</br>
     <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
   </div>
   <%= devise_error_one(:open_score) %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :current_password, class: "control-label" %> <!-- <i>(we need your current password to confirm your changes)</i> --><br />
     <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
   </div>
