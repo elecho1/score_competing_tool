@@ -7,7 +7,7 @@
         <%= link_to image_tag("assets/images/logo.png", alt: "Progressus"), root_path, class: "navbar-brand" %>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right">
+				<ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Home", root_path %></li>
 					<li><%= link_to "about", about_path %></li>
           <% unless user_signed_in? %>

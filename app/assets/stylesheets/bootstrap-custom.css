@@ -12,10 +12,25 @@
   }
 }
 
+@media (min-width: 992px) {
+  .container {
+    width: 900px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 900px;
+  }
+}
+
 .navbar-brand {
   float: left;
   height: 70px;
   padding: 23px 15px;
   font-size: 20px;
   line-height: 24px;
+}
+
+.navbar-collapse {
+  max-height: 500px;
 }

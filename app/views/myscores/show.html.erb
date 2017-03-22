@@ -5,15 +5,22 @@
     <th>科目名</th>
     <th>点数</th>
     <th>順位</th>
+    <th></th>
   </tr>
   <% @scores.each do |score| %>
     <tr>
       <td><%= score.subject.key %></td>
       <td><%= score.value %></td>
       <% if score.registered %>
-        <td><%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中</td>
+        <td>
+          <%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中
+        </td>
+        <td>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の<%= score.subject.key %>の点数は**点で、順位は<%= @standings[score.id][:number] %>人中<%= @standings[score.id][:standing] %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </td>
       <% else %>
         <td>未受講</td>
+        <td></td>
       <% end %>
     </tr>
   <% end %>

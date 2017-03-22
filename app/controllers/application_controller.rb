@@ -25,8 +25,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys:[:email, :user_key, :user_name, :open_user_name, :open_score])
     devise_parameter_sanitizer.permit(:sign_up, keys:[:email, :user_key, :user_name, :open_user_name, :open_score])
     devise_parameter_sanitizer.permit(:account_update, keys:[:email, :user_key, :user_name, :open_user_name, :open_score])
+  end
 
-
+  # changed where to redirect to after sign-in
+  def after_sign_in_path_for(resource)
+    table_path
   end
   
 end
