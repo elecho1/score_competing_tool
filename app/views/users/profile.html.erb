@@ -1,5 +1,4 @@
 <h2>アカウント情報</h2>
-<%= link_to "アカウント情報変更", edit_user_registration_path %>
 <table class="table table-hover table-striped table-bordered table-bordered-darkgray">
   <tr>
     <td><%= t('attributes.user_key') %> </br>(※ユーザーIDは公開されません）</td>
@@ -32,5 +31,6 @@
       <td><%= t('view.noo') %></td>
     <% end %>
   </tr>
-
 </table>
+
+<%= link_to "アカウント情報変更", edit_user_registration_path, class: "btn btn-info" %>
