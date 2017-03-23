@@ -5,7 +5,7 @@ ja:
     password_confirmation: パスワード（再入力）
     current_password: 現在のパスワード
     user: ユーザー
-    remember_me: 次回からパスワード入力を省く
+    remember_me: 次回からパスワード入力を省略する
     user_key: ユーザーID 
     user_name: 名前
     open_user_name: 名前の公開の可否
