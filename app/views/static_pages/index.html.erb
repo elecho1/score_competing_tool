@@ -1,16 +1,21 @@
-君は Hello World! なフレンズなんだね！<br>
-<br>
-リンク
-<%= link_to "about", about_path %></br>
-<%= link_to "新規登録", new_user_registration_path %> </br>
+<h2 class="text-center">ようこそジャパリパークへ！</h2>
+
 <% unless user_signed_in? %>
-  <%= link_to "ログイン", new_user_session_path %></br>
+  <div class="text-center">
+    <%= link_to "ログイン", new_user_session_path, class:"btn btn-info margin-5px" %>
+    <%= link_to "新規登録", new_user_registration_path, class:"btn btn-default margin-5px" %> 
+  </div>
+
 <% else %>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> </br>
+  <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %> 
   <%#= link_to "アカウント情報変更", edit_user_registration_path %>
-  <%= link_to "アカウント情報確認", users_profile_path %> </br>
-  <%= link_to "点数登録", new_myscores_path %> </br>
-  <%= link_to "点数更新", edit_myscores_path %> </br>
-  <%= link_to "自分の点数", myscores_path %></br>
-  <%= link_to "みんなの点数一覧表", table_path %></br>
+  <%#= link_to "アカウント情報確認", users_profile_path %> 
+  <%#= link_to "点数登録", new_myscores_path %> 
+  <%#= link_to "点数更新", edit_myscores_path %> 
+  <%#= link_to "自分の点数", myscores_path %>
+  <%#= link_to "みんなの点数一覧表", table_path %>
+  <div class="text-center">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-info margin-5px" %>
+    <%= link_to "みんなの点数一覧表", table_path, class:"btn btn-default margin-5px" %> 
+  </div>
 <% end %>

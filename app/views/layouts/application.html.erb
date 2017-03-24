@@ -2,7 +2,7 @@
 <!-- used Honoka as Bootstrap thema -->
 <html>
 <head>
-  <title>ScoreCompetingTool</title>
+  <title>みんなのせいせき</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -20,10 +20,10 @@
 
 <%# flash and notice for devise flash message %>
 <% if notice %>
-  <p class="alert alert-info"><%= notice %></p>
+  <div class="alert alert-info text-center margin-top-10px"><%= notice %></div>
 <% end %>
 <% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
+  <div class="alert alert-danger"><%= alert %></div>
 <% end %>
 
 </div>

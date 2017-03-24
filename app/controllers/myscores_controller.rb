@@ -1,7 +1,7 @@
 class MyscoresController < ApplicationController
   #callback
   before_action :authenticate_user!
-  before_action :registered_scores?, except: :new
+  before_action :registered_scores?, except: [:new, :create]
 
 
 
@@ -28,7 +28,7 @@ class MyscoresController < ApplicationController
       flash[:error_msgs] = @myscore.errors.full_messages 
       #redirect_to new_myscores_path
       @subjects = Subject.all.order(:id)
-      render :new
+      redirect_to action: :new
     end
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
