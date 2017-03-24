@@ -6,9 +6,67 @@
 </ul>
 <h1 class="text-center">まだ未公開です。</h1>
 <br>
-<h2>機能追加予定</h2>
-<ul>
-  <li>総合順位、GPA表示</li>
-  <li>評価の分布</li>
-  <li>優・良・可等の選択式に移行</li>
-</ul>
+
+<table class="table table-hover table-responsive table-striped table-bordered table-bordered-darkgray">
+  <thead>
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>総合点数</th>
+    <% @subjects.each do |subject| %>
+      <th><%= subject.key %> </th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user_scores.each_with_index do |user_score, idx| %>
+    <% if user_score.user_id == current_user.id %>
+      <tr class="bg-info">
+    <% else %>
+      <tr>
+    <% end %>
+      <th><%= idx + 1 %></th>
+      
+      <% if user_score.user.open_user_name %>
+        <td><%= user_score.user.user_name %></td>
+      <% else %>
+        <td> - </td>
+      <% end %>
+
+      <% if user_score.user.open_score %>
+        <td><%= user_score.total_score %></td>
+      <% else %>
+        <td> - </td>
+      <% end %>
+
+      <% if user_score.user.open_score %>
+        <%# user_score.scores.each do |score| %>
+        <% for subject_id in @subject_ids %>
+          <%##### to find_out the score which has the certain subject_id #####%>
+          <% this_score = "" %>
+          <% user_score.scores.each do |score|%>
+            <% if score.subject_id == subject_id %>
+              <% this_score = score %>
+              <% break %>
+            <% end %>
+          <% end %>
+          <%# score = user_score.scores.find_by(subject_id: subject_id) %>
+          <%##### finish #####%>
+  
+          <% if this_score.registered %>
+            <td><%= this_score.value %></td>
+          <% else %>
+            <td>未受講</td>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% @subjects.size.times do %>
+          <td> - </td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+
+</table>
