@@ -74,7 +74,7 @@
   <%= devise_error_one(:password_confirmation) %>
 
   <div class="form-group">
-    <%= f.label "点数を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <%= f.label "点数を一覧表に開示しますか？（現段階では公開しないことをオススメします）", class: "control-label col-xs-5 col-sm-5  text-right" %>
     <div class="col-xs-6 col-sm-5">
       <%= f.radio_button :open_score, true, checked: true, autofocus: true %>はい</br>
       <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
