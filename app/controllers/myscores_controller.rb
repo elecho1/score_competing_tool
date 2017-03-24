@@ -62,7 +62,34 @@ class MyscoresController < ApplicationController
   end
 
   def show
+    #自分の点数たち
     @myscore = current_user.user_score
+
+    # 総合順位（点数）&（GPA）
+    @user_scores = UserScore.all.order(total_score: :DESC)
+    stand_count_score = 1
+    @user_scores.each do |user_score|
+      if user_score.total_score > @myscore.total_score
+        stand_count_score += 1
+      else
+        break
+      end
+    end
+    @total_score_standing = stand_count_score
+
+    # 総合順位（GPA）
+    stand_count_gpa = 1
+    @user_scores.each do |user_score|
+      if user_score.gpa > @myscore.gpa
+        stand_count_gpa += 1
+      else
+        break
+      end
+    end
+    @gpa_standing = stand_count_gpa
+
+    
+    # 各科目の順位
     @scores = @myscore.scores.includes(subject: :scores)
     @subjects = @myscore.subjects.order(:id)
     @standings = Hash.new
@@ -115,9 +142,9 @@ class MyscoresController < ApplicationController
         sum += 4.3 * score.subject.weight
       elsif score.value >= 80 #優
         sum += 4.0 * score.subject.weight
-      elsif score.value >= 70 #良
+      elsif score.value >= 65 #良
         sum += 3.0 * score.subject.weight
-      elsif score.value >= 60 #可
+      elsif score.value >= 50 #可
         sum += 2.0 * score.subject.weight
       end
     end

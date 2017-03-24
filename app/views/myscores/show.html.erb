@@ -1,5 +1,45 @@
 <h2>自分の点数</h2>
 
+<h3>総合成績</h3>
+<p size="-1" class="gray"> ※もしGPAの値が不自然だと思った場合は、1度点数を変えずに点数更新を実行してみて下さい</p>
+
+<table class="table table-hover table-striped table-bordered table-bordered-darkgray font-weight-300">
+  <tbody>
+    <tr>
+      <td><strong>総合点数</strong></td>
+      <td><%= @myscore.total_score %>点</td>
+      <td><strong>総合点数順位</strong></td>
+      <%# binding.pry %>
+      <td><%= @total_score_standing %>位/<%= @user_scores.size %>人中</td>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の総合点数は<%= @myscore.total_score %>点で、順位は<%= @user_scores.count %>人中<%= @total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>GPA</strong></td>
+      <td><%= @myscore.gpa %></td>
+      <td><strong>GPA順位</strong></td>
+      <td><%= @gpa_standing %>位/<%= @user_scores.count %>人中</td>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私のGPAは<%= @myscore.gpa %>点で、順位は<%= @user_scores.count %>人中<%= @gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <span class="col-xs-12 col-sm-2
+ text-left padding-right-0">※GPA基準：</span>
+  <ul class="list-inline col-xs-12 col-sm-9 text-left">
+    <li>優上：4.3</li>
+    <li>優　：4</li>
+    <li>良　：3</li>
+    <li>可　：2</li>
+    <li>不可：0</li>
+  </ul>
+</div>
+
+<h3>点数詳細</h3>
 <table class="table table-hover table-striped table-bordered">
   <thead>
   <tr class="text-center">
