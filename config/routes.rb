@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'index' => 'static_pages#index'
   get 'about' => 'static_pages#about'
   resource "myscores", path: 'users/myscores', except:[:destroy]
-  resource :table, only:[:show]
+  # resource :table, only:[:show]
   get 'please-register-your-scores' => 'static_pages#please_register_your_scores'
 
 
