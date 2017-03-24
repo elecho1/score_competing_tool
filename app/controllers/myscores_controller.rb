@@ -51,6 +51,7 @@ class MyscoresController < ApplicationController
     @myscore = current_user.user_score
         #binding.pry
     @myscore.update(scores_params)
+    update_user_score_info(@myscore)
     if @myscore.errors.any? 
       flash[:error_num] = @myscore.errors.count
       flash[:error_msgs] = @myscore.errors.full_messages 
@@ -88,8 +89,16 @@ class MyscoresController < ApplicationController
   def update_user_score_info(myscore)
     #current_user_score = current_user.user_score
     scores = myscore.scores.where(registered: true)
-    myscore.total_score = scores.sum(:value)
-    myscore.score_count = scores.count
+    temp_total_score = 0;
+    temp_score_count = 0;
+    scores.each do |score|
+      temp_total_score += score.value * score.subject.weight
+      temp_score_count += score.subject.weight
+    end
+    #myscore.total_score = scores.sum(:value)
+    myscore.total_score = temp_total_score
+    #myscore.score_count = scores.count
+    myscore.score_count = temp_score_count
     if myscore.score_count == 0
       myscore.gpa = 0
     else     
@@ -103,13 +112,13 @@ class MyscoresController < ApplicationController
     sum = 0
     scores.each do |score|
       if score.value >= 90  #優上
-        sum += 4.3
+        sum += 4.3 * score.subject.weight
       elsif score.value >= 80 #優
-        sum += 4.0
+        sum += 4.0 * score.subject.weight
       elsif score.value >= 70 #良
-        sum += 3.0
+        sum += 3.0 * score.subject.weight
       elsif score.value >= 60 #可
-        sum += 2.0
+        sum += 2.0 * score.subject.weight
       end
     end
     return sum
