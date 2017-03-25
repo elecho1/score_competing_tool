@@ -17,7 +17,9 @@
       <div class="form-group">
         <%= s.label :value, subject.key, class: "control-label col-xs-6 col-sm-4" %>
         <div class="col-xs-6 col-sm-2">
+        <!-- 点数の入力欄 -->
           <%= s.text_field :value, size: 8, class: "form-control", placeholder: "点数" %>
+        <!-- 評価の入力欄 -->
         </div>
         <div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-0">
           <%= s.label :registered, t('view.notregistered'), class: "control-label" %>

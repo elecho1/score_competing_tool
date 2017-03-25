@@ -58,3 +58,4 @@ group :production, :staging do
 end
 
 gem 'rack-ssl-enforcer'
+gem 'dotenv-rails'
