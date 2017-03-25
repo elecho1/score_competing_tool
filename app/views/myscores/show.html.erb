@@ -44,7 +44,7 @@
   <thead>
   <tr class="text-center">
     <th>科目名</th>
-    <th>点数</th>
+    <th>評価</th>
     <th>順位</th>
     <th></th>
   </tr>
@@ -54,7 +54,7 @@
   <% @scores.each do |score| %>
     <tr>
       <td><%= score.subject.key %></td>
-      <td><%= score.value %></td>
+      <td class="text-center font-weight-bolder"><%= score_evaluate(score.value) %></td>
       <% if score.registered %>
         <td>
           <%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中

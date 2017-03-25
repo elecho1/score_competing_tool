@@ -53,7 +53,7 @@
           <%##### finish #####%>
   
           <% if this_score.registered %>
-            <td><%= this_score.value %></td>
+            <td class="font-weight-bolder"><%= score_evaluate(this_score.value) %></td>
           <% else %>
             <td>未受講</td>
           <% end %>
