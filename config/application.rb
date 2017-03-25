@@ -28,5 +28,10 @@ module ScoreCompetingTool
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       "<span class='field_with_errors'>#{html_tag}</span>".html_safe
     end
+
+    # for rack-ssl-enforcer
+    config.middleware.use Rack::SslEnforcer, :only_environments => 'production'
+    config.middleware.use Rack::SslEnforcer, :only_hosts => /.+\.herokuapp\.com/
+    #config.middleware.insert_before ActionDispatch::Cookies, Rack::SslEnforcer
   end
 end
