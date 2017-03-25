@@ -29,6 +29,7 @@ class MyscoresController < ApplicationController
       #redirect_to new_myscores_path
       @subjects = Subject.all.order(:id)
       redirect_to action: :new
+      return
     end
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
@@ -38,6 +39,8 @@ class MyscoresController < ApplicationController
     #  score = Score.new
     #  @scores.push(new_score(subject, @myscore))
     #end
+    redirect_to action: :show
+    return
   end
 
   def edit
@@ -58,7 +61,10 @@ class MyscoresController < ApplicationController
       #redirect_to new_myscores_path
       @subjects = Subject.all.order(:id)
       render :edit
+      return
     end
+    redirect_to action: :show
+    return
   end
 
   def show
@@ -138,13 +144,13 @@ class MyscoresController < ApplicationController
   def gpa_sum(scores)
     sum = 0
     scores.each do |score|
-      if score.value >= 90  #優上
+      if score.value >= Constants::YUJYOU_VALUE  #優上
         sum += 4.3 * score.subject.weight
-      elsif score.value >= 80 #優
+      elsif score.value >= Constants::YU_VALUE #優
         sum += 4.0 * score.subject.weight
-      elsif score.value >= 65 #良
+      elsif score.value >= Constants::RYOU_VALUE #良
         sum += 3.0 * score.subject.weight
-      elsif score.value >= 50 #可
+      elsif score.value >= Constants::KA_VALUE #可
         sum += 2.0 * score.subject.weight
       end
     end
