@@ -33,7 +33,7 @@
     <%= f.label "名前を公開しますか？", class: "control-label col-xs-5 col-sm-5 text-right" %>
     <div class="col-xs-6 col-sm-4">
       <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
-      <%= f.radio_button :open_user_name, false, checked: true, autofocus: true %>いいえ
+      <%= f.radio_button :open_user_name, false, autofocus: true %>いいえ
     </div>
   </div>
   <%= devise_error_one(:open_user_name) %>

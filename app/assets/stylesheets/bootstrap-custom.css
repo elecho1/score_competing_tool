@@ -62,3 +62,25 @@ body {
 .bg-info {
   background-color: #e3f2fd !important;
 }
+
+.btn-danger:active, .btn-danger.active{
+  background-color: #A61D13;
+  border-color: #A60F05;
+}
+.btn-warning:active, .btn-warning.active{
+  color: #fff;
+  background-color: #B06A01;
+  border-color: #9A5D01;
+}
+.btn-success:active, .btn-success.active {
+  background-color: #28672C;
+  border-color: #205423;
+}
+.btn-info:active, .btn-info.active {
+  background-color: #1E697F;
+  border-color: #1A5B6F;
+}
+.btn-primary:active, .btn-primary.active {
+  background-color: #143B5D;
+  border-color: #11324F;
+}
