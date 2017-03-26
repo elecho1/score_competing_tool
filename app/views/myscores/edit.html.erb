@@ -9,6 +9,12 @@
   <li>未受講の科目は、未受講の欄にチェックを入れて下さい。</li>
 </ul>
 
+<% if flash[:already_registered].present? %>
+  <div class="alert alert-info">
+    <%= flash[:already_registered] %>
+  </div>
+<% end %>
+
 <hr class="style-one">
 
 <%# flash errors for scores %>

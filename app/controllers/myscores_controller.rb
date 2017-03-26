@@ -6,6 +6,11 @@ class MyscoresController < ApplicationController
 
 
   def new
+    if current_user.user_score.present?
+      flash[:already_registered] = "すでに点数は登録されています。"
+      redirect_to edit_myscores_path
+      return
+    end
     @myscore = UserScore.new
     @myscore.scores.build
     @subjects = Subject.all.order(:id)
