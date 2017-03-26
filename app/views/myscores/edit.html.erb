@@ -80,27 +80,6 @@
           
         </div>
 
-        <!--
-        <div class="col-xs-8 col-sm-5 btn-group text-center" data-toggle="buttons">
-          <label class="btn btn-primary button-setting">
-            <%= s.radio_button :value, Constants::YUJYOU_VALUE, {} %>優上
-          </label>
-          <label class="btn btn-info button-setting active">
-            <%= s.radio_button :value, Constants::YU_VALUE, {} %>優
-          </label>
-          <label class="btn btn-success button-setting">
-            <%= s.radio_button :value, Constants::RYOU_VALUE, {} %>良
-          </label>
-          <label class="btn btn-warning button-setting">
-            <%= s.radio_button :value, Constants::KA_VALUE, {} %>可
-          </label>
-          <label class="btn btn-danger button-setting">
-            <%= s.radio_button :value, Constants::HUKA_VALUE, {} %>不可
-          </label>
-        </div>
-        -->
-        
-
         <div class="col-xs-6 col-xs-offset-4 col-sm-3 col-sm-offset-0">
         <%= s.label :registered, t('view.notregistered'), class: "control-label" %>
         <% if s.object.registered %>
