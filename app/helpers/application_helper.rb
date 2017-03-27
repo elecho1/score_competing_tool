@@ -1,7 +1,11 @@
 module ApplicationHelper
   def score_evaluate(score)
     html=""
-    if score >= Constants::YUJYOU_VALUE
+    if score.blank?
+      html += <<-BOF1
+        <span>未登録</span>
+      BOF1
+    elsif score >= Constants::YUJYOU_VALUE
       html += <<-BOF1
         <span class="text-darkviolet">優上</span>
       BOF1

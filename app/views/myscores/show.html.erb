@@ -54,7 +54,11 @@
   <% @scores.each do |score| %>
     <tr>
       <td><%= score.subject.key %></td>
-      <td class="text-center font-weight-bolder"><%= score_evaluate(score.value) %></td>
+      <% if score.registered %>
+        <td class="text-center font-weight-bolder"><%= score_evaluate(score.value) %></td>
+      <% else %>
+        <td class="text-center font-weight-bolder"><span>未受講</span></td>
+      <% end %>
       <% if score.registered %>
         <td>
           <%= @standings[score.id][:standing] %>位/<%= @standings[score.id][:number] %>人中
