@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   get 'index' => 'static_pages#index'
   get 'about' => 'static_pages#about'
-  resource "myscores", path: 'users/myscores', except:[:destroy]
+  resource 'myscores', path: 'users/myscores', except:[:destroy]
   resource :table, only:[:show]
   get 'please-register-your-scores' => 'static_pages#please_register_your_scores'
+  resource :distribution_graph, path: 'dist-graph', only:[:show]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
