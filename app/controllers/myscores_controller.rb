@@ -89,7 +89,7 @@ class MyscoresController < ApplicationController
     @total_score_standing = stand_count_score
 
     # 総合順位（GPA）
-    user_scores_gpa = @user_scores.order(gpa: :DESC)
+    user_scores_gpa = UserScore.all.order(gpa: :DESC)
     stand_count_gpa = 1
     user_scores_gpa.each do |user_score|
       if user_score.gpa > @myscore.gpa
