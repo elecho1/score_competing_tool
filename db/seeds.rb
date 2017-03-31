@@ -1,27 +1,43 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+  def gpa_sum(scores)
+    sum = 0
+    scores.each do |score|
+      if score.value >= Constants::YUJYOU_VALUE  #優上
+        sum += 4.3 * score.subject.weight
+      elsif score.value >= Constants::YU_VALUE #優
+        sum += 4.0 * score.subject.weight
+      elsif score.value >= Constants::RYOU_VALUE #良
+        sum += 3.0 * score.subject.weight
+      elsif score.value >= Constants::KA_VALUE #可
+        sum += 2.0 * score.subject.weight
+      end
+    end
+    return sum
+  end
 
+  def update_user_score_info(myscore)
+    #current_user_score = current_user.user_score
+    scores = myscore.scores.where(registered: true)
+    temp_total_score = 0;
+    temp_score_count = 0;
+    scores.each do |score|
+      temp_total_score += score.value * score.subject.weight
+      temp_score_count += score.subject.weight
+    end
+    #myscore.total_score = scores.sum(:value)
+    myscore.total_score = temp_total_score
+    #myscore.score_count = scores.count
+    myscore.score_count = temp_score_count
+    if myscore.score_count == 0
+      myscore.gpa = 0
+    else     
+      myscore.gpa = gpa_sum(scores)/myscore.score_count
+    end
+    #binding.pry
+    myscore.save
+  end
+  
+user_scores = UserScore.all
 
-Subject.create(key: "数学1D", weight: "2")
-Subject.create(key: "生命科学概論", weight: "2")
-Subject.create(key: "数理手法Ⅰ", weight: "2")
-Subject.create(key: "数理手法Ⅴ", weight: "2")
-Subject.create(key: "ディジタル回路", weight: "2")
-Subject.create(key: "電子基礎物理", weight: "4")
-Subject.create(key: "エネルギー工学", weight: "2")
-Subject.create(key: "電気電子数学演習", weight: "3")
-Subject.create(key: "電気電子計測", weight: "2")
-Subject.create(key: "電子デバイス基礎", weight: "2")
-Subject.create(key: "電気磁気学Ⅰ", weight: "2")
-Subject.create(key: "電気磁気学Ⅱ", weight: "2")
-Subject.create(key: "電気回路理論第一", weight: "4")
-Subject.create(key: "ソフトウェアⅠ", weight: "2")
-Subject.create(key: "ソフトウェアⅡ", weight: "2")
-Subject.create(key: "情報通信理論", weight: "2")
-Subject.create(key: "信号解析基礎", weight: "2")
-Subject.create(key: "プログラミング基礎演習", weight: "1.5")
+user_scores.each do |myscore|
+  update_user_score_info(myscore)
+end
