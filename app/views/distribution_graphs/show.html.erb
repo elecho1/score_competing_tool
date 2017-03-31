@@ -1,4 +1,5 @@
 <span id="sample-font"></span>
+
 <!-- Chart.jsのデフォルト設定 -->
 <script type="text/javascript">
   var elem1 = document.getElementById("sample-font");
@@ -8,10 +9,14 @@
   // フォントファミリー
   //Chart.defaults.global.defaultFontFamily="'Open Sans', 'Helvetica Neue', Helvetica, 'Arial', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif";
   Chart.defaults.global.defaultFontFamily = window.getComputedStyle(elem1, null).fontFamily;
-
   // フォントサイズ
-  Chart.defaults.global.defaultFontSize = parseFloat(window.getComputedStyle(elem1, null).fontSize);
   //Chart.defaults.global.defaultFontSize = 16;
+  Chart.defaults.global.defaultFontSize = parseFloat(window.getComputedStyle(elem1, null).fontSize);
+
+  // ブラウズの幅変更時のアニメーションの長さ
+  //Chart.defaults.global.responsiveAnimationDuration = 500;
+
+  
 
 </script>
 
