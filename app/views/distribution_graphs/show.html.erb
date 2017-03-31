@@ -15,21 +15,21 @@
 
   // ブラウズの幅変更時のアニメーションの長さ
   //Chart.defaults.global.responsiveAnimationDuration = 500;
-
-  
-
 </script>
 
-<canvas id="myBarChart" height="450" width="600">（※表示にはcanvas要素を解釈可能なブラウザが必要です。）</canvas>
+<h2><%= @subjects.first.key %>の評価の分布</h2>
+<% subject_id = @subjects.first.id %>
+
+<canvas id="myBarChart" height="200" width="250">（※表示にはcanvas要素を解釈可能なブラウザが必要です。）</canvas>
 
 
 <script type="text/javascript">
 
   var data = {
-    labels: ["優上", "優", "良", "可", "不可", "May", "June", "July"],
+    labels: ["優上", "優", "良", "可", "不可", "未受講"],
     datasets: [
         {
-            //label: "My First dataset",
+            label: "My First dataset",
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -47,7 +47,14 @@
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
-            data: [65, 59, 80, 81, 56, 55, 40, 70],
+            data: [
+                <%= @subject_eval_count[subject_id][:yujyou_count] %>, 
+                <%= @subject_eval_count[subject_id][:yu_count] %>, 
+                <%= @subject_eval_count[subject_id][:ryou_count] %>, 
+                <%= @subject_eval_count[subject_id][:ka_count] %>, 
+                <%= @subject_eval_count[subject_id][:huka_count] %>, 
+                <%= @subject_eval_count[subject_id][:mijyukou_count] %>
+            ],
         }
     ]
 };
