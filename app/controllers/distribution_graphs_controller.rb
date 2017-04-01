@@ -28,7 +28,7 @@ class DistributionGraphsController < ApplicationController
         end
       end
 
-      @subject_eval_count[subject.id] = {mijyukou_count: mijyukou_count, yujyou_count: yujyou_count, yu_count: yujyou_count, ryou_count: ryou_count, ka_count: ka_count, huka_count: huka_count}
+      @subject_eval_count[subject.id] = {mijyukou_count: mijyukou_count, yujyou_count: yujyou_count, yu_count: yu_count, ryou_count: ryou_count, ka_count: ka_count, huka_count: huka_count}
       
     end
 
