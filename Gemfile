@@ -55,6 +55,7 @@ gem 'bootstrap_form'
 
 group :production, :staging do
   gem 'rails_12factor'
+  gem 'google-analytics-rails'
 end
 
 gem 'rack-ssl-enforcer'
