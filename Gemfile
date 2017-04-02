@@ -60,3 +60,4 @@ end
 
 gem 'rack-ssl-enforcer'
 gem 'dotenv-rails'
+gem 'omniauth-slack'

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
   #resources :users, only: [:show]
   get 'users/profile' => 'users#profile'
   root 'static_pages#index'
