@@ -11,6 +11,8 @@ class Score < ActiveRecord::Base
   #validates :value, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, presence: true, if: :registered
 
   #temporary
-  validates :value, inclusion:{in:[Constants::YUJYOU_VALUE, Constants::YU_VALUE, Constants::RYOU_VALUE, Constants::KA_VALUE, Constants::HUKA_VALUE]}, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, presence: true, if: :registered
+  validates :value, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, presence: true, if: :registered
+
+  #, inclusion:{in:[Constants::YUJYOU_VALUE, Constants::YU_VALUE, Constants::RYOU_VALUE, Constants::KA_VALUE, Constants::HUKA_VALUE]}
 
 end
