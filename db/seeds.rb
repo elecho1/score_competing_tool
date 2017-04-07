@@ -1,6 +1,6 @@
 # update scores culculating system.
 
-scores = Score.where('id > ?', 7502)
+scores = Score.all
 
 scores.each do |score|
   if score.value.present?
