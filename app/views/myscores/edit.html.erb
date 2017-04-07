@@ -91,7 +91,8 @@
               <%= s.radio_button :value, Constants::KA_VALUE, {} %>可
           </label>
 
-          <% if s.object.value <= Constants::HUKA_VALUE %>
+          <%# if s.object.value <= Constants::HUKA_VALUE %>
+          <% if s.object.value < Constants::KA_VALUE %>
             <label class="btn btn-danger button-setting active">
           <% else %>
             <label class="btn btn-danger button-setting">
