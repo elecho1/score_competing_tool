@@ -1,7 +1,6 @@
 # update scores culculating system.
 
 scores = Score.all
-binding.pry
 
 scores.each do |score|
   if score.value.present?
@@ -16,8 +15,7 @@ scores.each do |score|
     else
       score.value = 60
     end
-    response = score.save
-    p response
+    score.save
   end
 end
 
