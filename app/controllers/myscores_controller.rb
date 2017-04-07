@@ -131,7 +131,7 @@ class MyscoresController < ApplicationController
     temp_total_score = 0;
     temp_score_count = 0;
     scores.each do |score|
-      temp_total_score += score.value * score.subject.weight
+      temp_total_score += (score.value - Constants::HUKA_VALUE) * score.subject.weight
       temp_score_count += score.subject.weight
     end
     #myscore.total_score = scores.sum(:value)
