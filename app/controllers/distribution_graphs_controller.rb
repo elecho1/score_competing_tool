@@ -1,4 +1,8 @@
 class DistributionGraphsController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :registered_scores?
+
   def show
     #subjects = Subject.all.includes(:scores).where("scores.registered = ?", true).references(:scores).order(:id)
     @subjects = Subject.all.includes(:scores).order(:id)
