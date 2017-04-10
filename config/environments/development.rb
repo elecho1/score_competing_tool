@@ -20,6 +20,18 @@ Rails.application.configure do
   # setting for confirmation mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => 'smtp.gmail.com',
+    :user_name => ENV['CONFIRM_MAIL_ADDRESS'],
+    :password => ENV['CONFIRM_MAIL_PASSWORD'],
+    :authentication => 'login', #'plain'だと何が違うんだろう
+  }
+
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
