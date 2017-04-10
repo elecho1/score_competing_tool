@@ -1,25 +1,36 @@
-<h2>Change your password</h2>
+<h2>パスワード変更</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+  <div class="form-group">
+      <%= f.label :password, class: "control-label" %><br>
+      <%# if @minimum_password_length %>
+      <% if @validatable %>
+      <br>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
+      <% end %>
+    <div class="col-xs-6 col-sm-5 padding-left-0">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
   </div>
+  <%= devise_error_one(:password) %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </br>
+  <div class="form-group">
+    <%= f.label :password_confirmation, class: "control-label" %><br>
+    <div class="col-xs-6 col-sm-5 padding-left-0">
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
   </div>
+  <%= devise_error_one(:password_confirmation) %>
 
+  </br>
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "パスワード変更", class: "margin-top-10px margin-bottom-10px" %>
   </div>
 <% end %>
+<br>
 
 <%= render "devise/shared/links" %>
