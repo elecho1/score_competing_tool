@@ -28,7 +28,7 @@ Rails.application.configure do
     :domain => 'smtp.gmail.com',
     :user_name => ENV['CONFIRM_MAIL_ADDRESS'],
     :password => ENV['CONFIRM_MAIL_PASSWORD'],
-    :authentication => 'login', #'plain'だと何が違うんだろう
+    :authentication => 'login', #Action_Mailerのヘルプを参照
   }
 
 
