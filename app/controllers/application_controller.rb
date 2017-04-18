@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
-  # basic confirmation
-  http_basic_authenticate_with name: ENV['BASIC_AUTH_USERNAME'], password: ENV['BASIC_AUTH_PASSWORD']
+
+  # basic confirmation (unabled in general)
+  before_action :http_basic_authenticate  
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   before_action :configure_user_permitted_parameters, if: :devise_controller?
   #before_action :authenticate_user!, if: :use_before_action?
-  #before_action :authenticate_user!, :only => [:show]
   protect_from_forgery with: :exception
 
   private

@@ -9,4 +9,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  private 
+  #unable http_auth
+  def http_basic_authenticate
+  end
+  
+
 end
