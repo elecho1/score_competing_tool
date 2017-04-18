@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  # basic confirmation (unabled in general)
-  before_action :http_basic_authenticate  
+  # basic confirmation 
+  before_action :http_basic_authenticate
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -29,6 +29,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys:[:email, :user_key, :user_name, :open_user_name, :open_score])
     devise_parameter_sanitizer.permit(:account_update, keys:[:email, :user_key, :user_name, :open_user_name, :open_score])
   end
+
+  def http_basic_authenticate
+  authenticate_or_request_with_http_basic do |name, password|
+    name == ENV['BASIC_AUTH_USERNAME'] && password == ENV['BASIC_AUTH_PASSWORD']
+  end
+end
+
 
   # changed where to redirect to after sign-in
   #def after_sign_in_path_for(resource)
