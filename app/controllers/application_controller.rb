@@ -31,10 +31,10 @@ class ApplicationController < ActionController::Base
   end
 
   def http_basic_authenticate
-  authenticate_or_request_with_http_basic do |name, password|
-    name == ENV['BASIC_AUTH_USERNAME'] && password == ENV['BASIC_AUTH_PASSWORD']
+    authenticate_or_request_with_http_basic  do |name, password|
+      name == ENV['BASIC_AUTH_USERNAME'] && password == ENV['BASIC_AUTH_PASSWORD']
+    end
   end
-end
 
 
   # changed where to redirect to after sign-in
