@@ -33,8 +33,15 @@ class DistributionGraphsController < ApplicationController
       end
 
       @subject_eval_count[subject.id] = {mijyukou_count: mijyukou_count, yujyou_count: yujyou_count, yu_count: yu_count, ryou_count: ryou_count, ka_count: ka_count, huka_count: huka_count}
-      
     end
-
   end
+
+  private
+  def registered_scores?
+    if current_user.user_score.blank?
+      redirect_to please_register_your_scores_path
+      return
+    end
+  end
+
 end
