@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20170324130437) do
     t.boolean  "open_user_name",                                  null: false
     t.boolean  "open_score",                                      null: false
     t.string   "user_name",              limit: 255
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
