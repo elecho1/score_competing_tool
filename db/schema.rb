@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826072734) do
+ActiveRecord::Schema.define(version: 20170826075552) do
 
   create_table "scores", force: :cascade do |t|
     t.integer  "user_score_id", limit: 4, null: false
@@ -63,6 +63,5 @@ ActiveRecord::Schema.define(version: 20170826072734) do
   end
 
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
-  add_index "users", ["user_key"], name: "index_users_on_user_key", unique: true, using: :btree
 
 end
