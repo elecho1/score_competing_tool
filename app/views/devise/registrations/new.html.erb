@@ -47,6 +47,30 @@
   </div>
   <%= devise_error_one(:email) %>
 
+  <%# newly added %>
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :provider, class: "control-label" %> 
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :provider, value: session["devise.slack_data"]["provider"], autofocus: true, class: "form-control col-xs-7 col-sm-5", readonly: true %>
+      <%#= binding.pry %>
+    </div>
+  </div>
+  <%= devise_error_one(:provider) %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :uid, class: "control-label" %> 
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :uid, value: session["devise.slack_data"]["uid"], autofocus: true, class: "form-control col-xs-7 col-sm-5", readonly: true %>
+      <%#= binding.pry %>
+    </div>
+  </div>
+  <%= devise_error_one(:provider) %>
+  <%# newly added end %>
+
   <div class="form-group">
     <span class="col-xs-5 col-sm-5 text-right">
       <%= f.label :password, class: "control-label" %>
