@@ -2,8 +2,9 @@
 
 <% unless user_signed_in? %>
   <div class="text-center">
-    <%= link_to "ログイン", new_user_session_path, class:"btn btn-info margin-5px" %>
-    <%= link_to "新規登録", new_user_registration_path, class:"btn btn-default margin-5px" %> 
+    <%#= link_to "ログイン", new_user_session_path, class:"btn btn-info margin-5px" %>
+    <%#= link_to "新規登録", new_user_registration_path, class:"btn btn-default margin-5px" %> 
+    <%= link_to image_tag('https://api.slack.com/img/sign_in_with_slack.png') , user_slack_omniauth_authorize_path %>
   </div>
 
 <% else %>
@@ -24,7 +25,6 @@
   </div>
 <% end %>
 <br>
-<%= link_to "Sign in with Slack", user_slack_omniauth_authorize_path %>
 <h2>機能追加予定</h2>
 <ul>
   <li>電電・電情の分類</li>

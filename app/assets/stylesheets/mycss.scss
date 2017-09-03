@@ -1,87 +1,120 @@
 .field_with_errors {
-  @extend .has-error;
+    @extend .has-error;
 }
 
+
 /* Autohide navbar */
-.slideUp { top:-100px; }
-.headroom { -webkit-transition: all 0.4s ease-out; -moz-transition: all 0.4s ease-out; -o-transition: all 0.4s ease-out; transition: all 0.4s ease-out; }
+
+.slideUp {
+    top: -100px;
+}
+
+.headroom {
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
 
 /* http://coliss.com/articles/build-websites/operation/css/css-simple-styles-for-horizontal-rules-by-css-tricks.html */
+
+
 /* 横線の<hr>の設定 */
+
 hr.style-one {
     border: 0;
     height: 1px;
     background: #333;
     background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
-    background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc);
-    background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
-    background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
 }
+
 hr.style-two {
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
 hr.style-four {
     height: 6px;
     border: 0;
-    box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 }
 
 // end
-
-.no-margin{
+.no-margin {
     margin: 0;
 }
 
-.margin-top-10px{
+.margin-top-10px {
     margin-top: 10px;
 }
 
-.margin-5px{
+.margin-5px {
     margin: 5px;
 }
 
-.margin-top-5pt{
-    margin-top:5pt;
+.margin-top-5pt {
+    margin-top: 5pt;
 }
 
-.gray, .text-gray{
-    color:gray;
+.gray,
+.text-gray {
+    color: gray;
 }
 
-.darkviolet, .text-darkviolet{
-    color:darkviolet;
+.darkviolet,
+.text-darkviolet {
+    color: darkviolet;
 }
 
-.blue, .text-blue{
-    color:blue;
+.blue,
+.text-blue {
+    color: blue;
 }
 
-.lime, .text-lime{
-    color:lime;
-}
-.orange, .text-orange{
-    color:orange;
-}
-.red, .text-red{
-    color:red;
-}
-.font-weight-bolder{
-    font-weight:bolder;
-}
-.font-size-smaller{
-    font-size:smaller;
+.lime,
+.text-lime {
+    color: lime;
 }
 
-.padding-right-0{
-    padding-right:0;
+.orange,
+.text-orange {
+    color: orange;
 }
 
-.button-setting{
-    border-radius:10px !important;
-    margin:0 5px;
+.red,
+.text-red {
+    color: red;
+}
+
+.font-weight-bolder {
+    font-weight: bolder;
+}
+
+.font-size-smaller {
+    font-size: smaller;
+}
+
+.padding-right-0 {
+    padding-right: 0;
+}
+
+.padding-top-0 {
+    padding-top: 0 !important;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0 !important;
+}
+
+.button-setting {
+    border-radius: 10px !important;
+    margin: 0 5px;
 }
