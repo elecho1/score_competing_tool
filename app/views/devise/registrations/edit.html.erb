@@ -42,6 +42,9 @@
   </div>
   <%= devise_error_one(:open_score) %>
 
+
+<%
+=begin%>
   <div class="form-group">
     <%= f.label :current_password, class: "control-label col-xs-5 col-sm-5  text-right" %> <!-- <i>(we need your current password to confirm your changes)</i> -->
     <div class="col-xs-6 col-sm-5">
@@ -49,6 +52,10 @@
     </div>
   </div>
   <%= devise_error_one(:current_password) %>
+<%
+=end
+%>
+
 
   <div class="form-group">
     <span class="col-xs-6 col-xs-offset-5 col-sm-5">

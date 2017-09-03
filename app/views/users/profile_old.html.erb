@@ -1,6 +1,10 @@
 <h2>アカウント情報</h2>
 <table class="table table-hover table-striped table-bordered table-bordered-darkgray">
   <tr>
+    <td><%= t('attributes.user_key') %> </br>(※ユーザーIDは公開されません）</td>
+    <td><%= @user.user_key %></td>
+  </tr>
+  <tr>
     <td><%= t('attributes.user_name') %></td>
     <td><%= @user.user_name %></td>
   </tr>
@@ -11,6 +15,14 @@
     <% else %>
       <td><%= t('view.noo') %></td>
     <% end %>
+  </tr>
+  <tr>
+    <td><%= t('attributes.email') %></td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td><%= t('attributes.password') %></td>
+    <td>********</td>
   </tr>
   <td><%= t('attributes.open_score') %></td>
     <% if @user.open_score %>
