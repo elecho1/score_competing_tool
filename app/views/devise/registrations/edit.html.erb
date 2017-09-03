@@ -34,7 +34,7 @@
 
 
   <div class="form-group">
-    <%= f.label "点数を一覧表に開示しますか？（現段階では公開しないことをオススメします）", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <%= f.label "点数を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
     <div class="col-xs-6 col-sm-5">
       <%= f.radio_button :open_score, true, checked: true, autofocus: true %>はい</br>
       <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
@@ -42,19 +42,24 @@
   </div>
   <%= devise_error_one(:open_score) %>
 
-
 <%
-=begin%>
+=begin
+%>
   <div class="form-group">
-    <%= f.label :current_password, class: "control-label col-xs-5 col-sm-5  text-right" %> <!-- <i>(we need your current password to confirm your changes)</i> -->
+    <%= f.label "salck認証有効化済み", class: "control-label col-xs-5 col-sm-5  text-right" %>
     <div class="col-xs-6 col-sm-5">
-      <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+      <%= f.radio_button :slack_enabled_flag, true, checked: true, autofocus: true, readonly: true %>はい</br>
+      <%= f.radio_button :slack_enabled_flag, false, autofocus: true, readonly: true %>いいえ</br>
     </div>
   </div>
-  <%= devise_error_one(:current_password) %>
+  <%= devise_error_one(:slack_enabled_flag) %>
 <%
 =end
 %>
+
+<div class="form-group">
+    <%= f.hidden_field :slack_enabled_flag, value:true %>
+  <%= devise_error_one(:slack_enabled_flag) %>
 
 
   <div class="form-group">

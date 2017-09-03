@@ -14,6 +14,7 @@ ja:
     not_registered: 未受講
     provider: 利用サービス
     uid: uid
+    slack_enabled_flag: Slack認証有効化
   date:
     abbr_day_names:
     - 日

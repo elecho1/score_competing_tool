@@ -16,8 +16,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to root_path
       else 
         flash[:notice] = "引き続きアカウント情報を登録してください。"
-        #redirect_to edit_user_registration_path
-        redirect_to root_path
+        redirect_to edit_user_registration_path
+        #redirect_to root_path
       end
       
       #sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
