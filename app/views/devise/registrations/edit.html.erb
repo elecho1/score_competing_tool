@@ -1,4 +1,4 @@
-<h2>アカウント情報変更 <%#= resource_name.to_s.humanize %></h2>
+<h2>アカウント情報登録／変更 <%#= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f| %>
 
@@ -64,7 +64,7 @@
 
   <div class="form-group">
     <span class="col-xs-6 col-xs-offset-5 col-sm-5">
-      <%= f.submit "変更" %>
+      <%= f.submit "登録" %>
     </span>
   </div>
 <% end %>
