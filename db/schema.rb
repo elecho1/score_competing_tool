@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831114653) do
+ActiveRecord::Schema.define(version: 20170908155343) do
 
   create_table "scores", force: :cascade do |t|
     t.integer  "user_score_id", limit: 4, null: false
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170831114653) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.float    "weight",     limit: 24,  null: false
+    t.integer  "semester",   limit: 4,   null: false
+    t.string   "type",       limit: 255, null: false
   end
 
   create_table "user_scores", force: :cascade do |t|
