@@ -26,7 +26,20 @@ class MyscoresController < ApplicationController
   # !!!!! バリデーション部要整形 !!!!
 
   def create
-    @myscore = UserScore.create(user_score_params)
+    user_score_params_data = user_score_params
+    #binding.pry
+    user_score_params_data[:scores_attributes].each do |key, value|
+      unless value.key?(:value) then
+        user_score_params_data[:scores_attributes][key][:registered] = "false"
+      else
+        if value[:registered].eql?("false") then
+          user_score_params_data[:scores_attributes][key].delete(:value)
+        end   
+      end
+    end
+    #binding.pry
+
+    @myscore = UserScore.create(user_score_params_data)
     update_user_score_info(@myscore)
     if @myscore.errors.any? 
       flash[:error_num] = @myscore.errors.count
@@ -56,9 +69,20 @@ class MyscoresController < ApplicationController
   end
   
   def update
+    scores_params_data = scores_params
+    scores_params_data[:scores_attributes].each do |key, value|
+      unless value.key?(:value) then
+        scores_params_data[:scores_attributes][key][:registered] = "false"
+      else
+        if value[:registered].eql?("false") then
+          scores_params_data[:scores_attributes][key][:value] = nil
+        end   
+      end
+    end
     @myscore = current_user.user_score
-        #binding.pry
-    @myscore.update(scores_params)
+    
+    binding.pry
+    @myscore.update(scores_params_data)
     update_user_score_info(@myscore)
     if @myscore.errors.any? 
       flash[:error_num] = @myscore.errors.count

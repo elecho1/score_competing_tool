@@ -1,0 +1,109 @@
+<h2>アカウント情報変更 <%#= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f| %>
+
+  <%#= devise_error_messages! %>
+  
+<%#= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+<%#= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :user_key, class: "control-label" %> <br class="visible-xs">（半角英数字）
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :user_key, autofocus: true, placeholder: "ユーザーID", class: "form-control" %>
+      <p class="no-margin">※ユーザーIDは公開されません</p>
+    </div>
+  </div>
+  <%= devise_error_one(:user_key) %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :user_name, class: "control-label" %> <br class="visible-xs">（またはニックネーム）
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :user_name, autofocus: true, placeholder: "ニックネーム（匿名可）", class: "form-control col-xs-7 col-sm-5" %>
+    </div>
+  </div>
+  <%= devise_error_one(:user_name) %>
+
+  <div class="form-group">
+    <%= f.label "名前を公開しますか？", class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-4">
+      <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_user_name, false, autofocus: true %>いいえ
+    </div>
+  </div>
+  <%= devise_error_one(:open_user_name) %>
+
+  <div class="form-group">
+    <%= f.label :email, class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:email) %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :password, "新しいパスワード", class: "control-label" %> <br>(パスワードを変更しない場合は記入しないで下さい）
+      <%# if @minimum_password_length %>
+    <% if @validatable %>
+      <br />
+      <em><%= @minimum_password_length %> 文字以上</em>
+    <% end %>
+    </span>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:password) %>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, "新しいパスワード（再入力）", class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:password_confirmation) %>
+
+  <div class="form-group">
+    <%= f.label "点数を一覧表に開示しますか？（現段階では公開しないことをオススメします）", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :open_score, true, checked: true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
+    </div>
+  </div>
+  <%= devise_error_one(:open_score) %>
+
+  <div class="form-group">
+    <%= f.label :current_password, class: "control-label col-xs-5 col-sm-5  text-right" %> <!-- <i>(we need your current password to confirm your changes)</i> -->
+    <div class="col-xs-6 col-sm-5">
+      <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:current_password) %>
+
+  <div class="form-group">
+    <span class="col-xs-6 col-xs-offset-5 col-sm-5">
+      <%= f.submit "変更" %>
+    </span>
+  </div>
+<% end %>
+
+<hr class="style-one">
+
+<h3>アカウント削除</h3>
+
+<p>アカウントを削除しますか？（削除すると元に戻せません） <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+
+<hr class="style-one">
+
+<%= link_to "戻る", :back, class:"btn btn-info" %>

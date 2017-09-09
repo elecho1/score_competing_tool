@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324130437) do
+ActiveRecord::Schema.define(version: 20170908155343) do
 
   create_table "scores", force: :cascade do |t|
     t.integer  "user_score_id", limit: 4, null: false
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170324130437) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.float    "weight",     limit: 24,  null: false
+    t.integer  "semester",   limit: 4,   null: false
+    t.string   "type",       limit: 255, null: false
   end
 
   create_table "user_scores", force: :cascade do |t|
@@ -41,28 +43,27 @@ ActiveRecord::Schema.define(version: 20170324130437) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: ""
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "user_key",               limit: 255,              null: false
-    t.boolean  "open_user_name",                                  null: false
-    t.boolean  "open_score",                                      null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.string   "user_key",               limit: 255,                 null: false
+    t.boolean  "open_user_name",                                     null: false
+    t.boolean  "open_score",                                         null: false
     t.string   "user_name",              limit: 255
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
+    t.boolean  "slack_enabled_flag",                 default: false, null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["user_key"], name: "index_users_on_user_key", unique: true, using: :btree
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
 end
