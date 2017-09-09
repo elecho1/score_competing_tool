@@ -8,5 +8,5 @@
 
 # add columns to Subject
 
-Subject.update_all(semester:4, type:'regular')
+Subject.update_all(semester:4, subject_type:'regular')
 

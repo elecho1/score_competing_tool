@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20170908155343) do
   add_index "scores", ["user_score_id", "subject_id"], name: "index_scores_on_user_score_id_and_subject_id", unique: true, using: :btree
 
   create_table "subjects", force: :cascade do |t|
-    t.string   "key",        limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.float    "weight",     limit: 24,  null: false
-    t.integer  "semester",   limit: 4,   null: false
-    t.string   "type",       limit: 255, null: false
+    t.string   "key",          limit: 255, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.float    "weight",       limit: 24,  null: false
+    t.integer  "semester",     limit: 4,   null: false
+    t.string   "subject_type", limit: 255, null: false
   end
 
   create_table "user_scores", force: :cascade do |t|
