@@ -21,102 +21,30 @@
 <%# flash errors for scores %>
 <%= render partial: 'layouts/scores_errors' %>
 
-<%= form_for @myscore, url: {action: 'update'}, html: {class:"form-horizontal"} do |f|%>
+<%= form_for @myscore, url: {action: 'update'}, html: {class:"form-horizontal"} do |f|%>  
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#semester4" data-toggle="tab"><b>2A</b></a></li>
+    <li><a href="#semester5" data-toggle="tab"><b>3S</b></a><li>
+  </ul>
 
-  <%= f.fields_for :scores do |s| %>
-    <%# @subjects.each do |subject| %>
-      <div class="form-group">
-        <%# binding.pry %>
-        <%= s.label :value, s.object.subject.key, class: "control-label col-xs-4 col-sm-4" %>
-
-        <!-- 点数の入力欄 -->
-        <!--
-        <div class="col-xs-6 col-sm-2">
-        <%#= s.text_field :value, size: 8, class: "form-control", placeholder: "点数" %>
-        </div>
-        -->
-        <!-- 評価の入力欄 -->
-
-        <div class="col-xs-8 col-sm-5 btn-group text-center" data-toggle="buttons">
-        <% if s.object.value.blank? %>
-          <!-- 優上 -->
-          <label class="btn btn-primary button-setting">
-            <%= s.radio_button :value, Constants::YUJYOU_VALUE, {} %>優上
-          </label>
-          <!-- 優 -->
-          <label class="btn btn-info button-setting">
-            <%= s.radio_button :value, Constants::YU_VALUE, {} %>優
-          </label>
-          <!-- 良 -->
-          <label class="btn btn-success button-setting">
-            <%= s.radio_button :value, Constants::RYOU_VALUE, {} %>良
-          </label>
-          <!-- 可 -->
-          <label class="btn btn-warning button-setting">
-            <%= s.radio_button :value, Constants::KA_VALUE, {} %>可
-          </label>
-          <label class="btn btn-danger button-setting">
-            <%= s.radio_button :value, Constants::HUKA_VALUE, {} %>不可
-          </label>
-
-        <% else %>
-          <% if s.object.value >= Constants::YUJYOU_VALUE %>
-            <label class="btn btn-primary button-setting active">
-          <% else %>
-            <label class="btn btn-primary button-setting">
-          <% end %>
-              <%= s.radio_button :value, Constants::YUJYOU_VALUE, {} %>優上
-          </label>
-
-          <% if s.object.value.between?(Constants::YU_VALUE, Constants::YUJYOU_VALUE-1) %>
-            <label class="btn btn-info button-setting active">
-          <% else %>
-            <label class="btn btn-info button-setting">
-          <% end %>
-              <%= s.radio_button :value, Constants::YU_VALUE, {} %>優
-          </label>
-          
-          <% if s.object.value.between?(Constants::RYOU_VALUE, Constants::YU_VALUE-1) %>
-            <label class="btn btn-success button-setting active">
-          <% else %>
-            <label class="btn btn-success button-setting">
-          <% end %>
-              <%= s.radio_button :value, Constants::RYOU_VALUE, {} %>良
-          </label>
-
-          <% if s.object.value.between?(Constants::KA_VALUE, Constants::RYOU_VALUE-1) %>
-            <label class="btn btn-warning button-setting active">
-          <% else %>
-            <label class="btn btn-warning button-setting">
-          <% end %>
-              <%= s.radio_button :value, Constants::KA_VALUE, {} %>可
-          </label>
-
-          <%# if s.object.value <= Constants::HUKA_VALUE %>
-          <% if s.object.value < Constants::KA_VALUE %>
-            <label class="btn btn-danger button-setting active">
-          <% else %>
-            <label class="btn btn-danger button-setting">
-          <% end %>
-              <%= s.radio_button :value, Constants::HUKA_VALUE, {} %>不可
-          </label>
-        
-        <% end %>          
-        </div>
-
-        <div class="col-xs-6 col-xs-offset-4 col-sm-3 col-sm-offset-0">
-        <%= s.label :registered, t('view.notregistered'), class: "control-label" %>
-        <% if s.object.registered %>
-          <%= s.check_box :registered, {checked: false}, checked_value = "false", unchecked_value = "true" %>
-        <% else %>
-          <%= s.check_box :registered, {checked: true}, checked_value = "false", unchecked_value = "true" %>
-        <% end %>
-        </div>
-
-        <%= s.hidden_field :subject_id, value: s.object.subject.id %>
-      </div>
-    <%# end %>
-  <% end %>
+  <div class="tab-content">
+    <div class="tab-pane active" id="semester4">
+      <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 4) do |s| %>
+      <%#= f.fields_for @myscore.scores do |s|%>
+        <%# @subjects.each do |subject| %>
+          <%= render 'edit_each_form', s:s%>
+        <%# end %>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="semester5">
+      <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 5) do |s| %>
+      <%#= f.fields_for @myscore.scores do |s|%>
+        <%# @subjects.each do |subject| %>
+          <%= render 'edit_each_form', s:s%>
+        <%# end %>
+      <% end %>
+    </div>
+  </div>
 
   <%= f.submit "点数更新" %>
 <% end %>

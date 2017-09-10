@@ -81,7 +81,7 @@ class MyscoresController < ApplicationController
     end
     @myscore = current_user.user_score
     
-    binding.pry
+    #binding.pry
     @myscore.update(scores_params_data)
     update_user_score_info(@myscore)
     if @myscore.errors.any? 
