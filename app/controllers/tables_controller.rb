@@ -13,6 +13,16 @@ class TablesController < ApplicationController
     @subject_ids = @subjects.map do |subject|
       subject.id
     end
+
+    @subjects_2A = @subjects.select{|subject| subject.semester == 4}
+    @subject_ids_2A = @subjects_2A.map do |subject|
+      subject.id
+    end
+
+    @subjects_3S = @subjects.select{|subject| subject.semester == 5}
+    @subject_ids_3S = @subjects_3S.map do |subject|
+      subject.id
+    end
   end 
 
   private
