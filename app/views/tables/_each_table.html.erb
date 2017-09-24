@@ -14,6 +14,10 @@
   <% @user_scores.each_with_index do |user_score, idx| %>
     <% if user_score.user_id == current_user.id %>
       <tr class="bg-info">
+    <% elsif user_score.user.department.eql?("denjo") %>
+      <tr class="success">
+    <% elsif user_score.user.department.eql?("denden") %>
+      <tr class="danger">
     <% else %>
       <tr>
     <% end %>
