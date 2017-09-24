@@ -42,6 +42,15 @@
   </div>
   <%= devise_error_one(:open_score) %>
 
+  <div class="form-group">
+    <%= f.label "学科を登録してください。", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :department, "denjo", checked: true, autofocus: true %>電情</br>
+      <%= f.radio_button :department, "denden", autofocus: true %>電電</br>
+    </div>
+  </div>
+  <%= devise_error_one(:department) %>
+
 <%
 =begin
 %>

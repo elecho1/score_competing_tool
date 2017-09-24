@@ -10,6 +10,7 @@ ja:
     user_name: 名前
     open_user_name: 名前の公開の可否
     open_score: 成績の公開の可否
+    department: 学科
     registered: 受講
     not_registered: 未受講
     provider: 利用サービス
@@ -213,3 +214,6 @@ ja:
     noo: いいえ 
     registered: 受講
     notregistered: 未受講
+    denjo: 電情
+    denden: 電電
+    oth_dep: その他

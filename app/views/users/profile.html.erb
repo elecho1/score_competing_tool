@@ -2,8 +2,24 @@
 <table class="table table-hover table-striped table-bordered table-bordered-darkgray">
   <tr>
     <td><%= t('attributes.user_name') %></td>
-    <td><%= @user.user_name %></td>
+    <% if @user.user_name.blank? %>
+      <td><%= "（未登録）"%>
+    <% else %>
+      <td><%= @user.user_name %></td>
+    <% end %>
   </tr>
+
+  <tr>
+    <td><%= t('attributes.department') %></td>
+    <% if @user.department.eql?("denjo") %>
+      <td><%= t('view.denjo') %></td>
+    <% elsif @user.department.eql?("denden") %>
+      <td><%= t('view.denden') %></td>
+    <% else %>
+      <td><%= t('view.oth_dep') %></td>
+    <% end %>
+  </tr>
+
   <tr>
     <td><%= t('attributes.open_user_name') %></td>
     <% if @user.open_user_name %>
