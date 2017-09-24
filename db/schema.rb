@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924074933) do
+ActiveRecord::Schema.define(version: 20170924161736) do
 
   create_table "scores", force: :cascade do |t|
     t.integer  "user_score_id", limit: 4, null: false
@@ -36,18 +36,18 @@ ActiveRecord::Schema.define(version: 20170924074933) do
   create_table "user_scores", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,                null: false
     t.float    "total_score",      limit: 24,               null: false
-    t.float    "gpa",              limit: 24
+    t.float    "gpa",              limit: 24, default: 0.0, null: false
     t.float    "score_count",      limit: 24, default: 0.0, null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.float    "sem4_total_score", limit: 24, default: 0.0, null: false
-    t.float    "sem4_gpa",         limit: 24
+    t.float    "sem4_gpa",         limit: 24, default: 0.0, null: false
     t.float    "sem4_score_count", limit: 24, default: 0.0, null: false
     t.float    "sem5_total_score", limit: 24, default: 0.0, null: false
-    t.float    "sem5_gpa",         limit: 24
+    t.float    "sem5_gpa",         limit: 24, default: 0.0, null: false
     t.float    "sem5_score_count", limit: 24, default: 0.0, null: false
     t.float    "sem6_total_score", limit: 24, default: 0.0, null: false
-    t.float    "sem6_gpa",         limit: 24
+    t.float    "sem6_gpa",         limit: 24, default: 0.0, null: false
     t.float    "sem6_score_count", limit: 24, default: 0.0, null: false
   end
 

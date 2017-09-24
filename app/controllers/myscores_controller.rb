@@ -100,7 +100,7 @@ class MyscoresController < ApplicationController
     #自分の点数たち
     @myscore = current_user.user_score
 
-    # 総合順位（点数）&（GPA）
+    # 総合順位（点数）総合点
     @user_scores = UserScore.all.order(total_score: :DESC)
     stand_count_score = 1
     @user_scores.each do |user_score|
@@ -123,6 +123,38 @@ class MyscoresController < ApplicationController
       end
     end
     @gpa_standing = stand_count_gpa
+
+    ### semester毎の順位
+    for num in 4..6 do
+      ### 総合順位
+      temp_user_scores = @user_scores.sort{|a, b| b.send("sem#{num.to_s}_total_score") <=> a.send("sem"+num.to_s+"_total_score")}
+      temp_stand_count_score = 1
+      temp_user_scores.each do |user_score|
+        if user_score.send("sem"+num.to_s+"_total_score") > @myscore.send("sem"+num.to_s+"_total_score")
+          temp_stand_count_score += 1
+        else
+          break
+        end
+      end
+      var = "@sem#{num.to_s}_total_score_standing"
+      eval("#{var} = temp_stand_count_score")
+      
+      ### GPA
+      temp_user_scores_gpa = @user_scores.sort{|a, b| b.send("sem"+num.to_s+"_gpa") <=> a.send("sem"+num.to_s+"_gpa")}
+      temp_stand_count_gpa = 1
+      temp_user_scores_gpa.each do |user_score|
+        #binding.pry
+        if user_score.send("sem"+num.to_s+"_gpa") > @myscore.send("sem"+num.to_s+"_gpa")
+          temp_stand_count_gpa += 1
+        else
+          break
+        end
+      end
+      var = "@sem#{num.to_s}_gpa_standing"
+      eval("#{var} = temp_stand_count_gpa")
+    end
+    #binding.pry
+
 
     
     # 各科目の順位
@@ -152,7 +184,7 @@ class MyscoresController < ApplicationController
   def update_user_score_info(myscore)
     #current_user_score = current_user.user_score
     ### total
-    scores = myscore.scores.where(registered: true)
+    scores = myscore.scores.where(registered: true).includes(:subject)
     score_hash = calculate_score(scores)    
     myscore.total_score = score_hash[:total]
     myscore.score_count = score_hash[:count]
