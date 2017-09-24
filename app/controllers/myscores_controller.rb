@@ -151,24 +151,53 @@ class MyscoresController < ApplicationController
   private
   def update_user_score_info(myscore)
     #current_user_score = current_user.user_score
+    ### total
     scores = myscore.scores.where(registered: true)
+    score_hash = calculate_score(scores)    
+    myscore.total_score = score_hash[:total]
+    myscore.score_count = score_hash[:count]
+    myscore.gpa = score_hash[:gpa]
+    ### 2A
+    sem4_scores = scores.select{|score| score.subject.semester == 4}
+    sem4_score_hash = calculate_score(sem4_scores)    
+    myscore.sem4_total_score = sem4_score_hash[:total]
+    myscore.sem4_score_count = sem4_score_hash[:count]
+    myscore.sem4_gpa = sem4_score_hash[:gpa]
+    ### 3S
+    sem5_scores = scores.select{|score| score.subject.semester == 5}
+    sem5_score_hash = calculate_score(sem5_scores)    
+    myscore.sem5_total_score = sem5_score_hash[:total]
+    myscore.sem5_score_count = sem5_score_hash[:count]
+    myscore.sem5_gpa = sem5_score_hash[:gpa]
+    ### 3A
+    sem6_scores = scores.select{|score| score.subject.semester == 6}
+    sem6_score_hash = calculate_score(sem6_scores)    
+    myscore.sem6_total_score = sem6_score_hash[:total]
+    myscore.sem6_score_count = sem6_score_hash[:count]
+    myscore.sem6_gpa = sem6_score_hash[:gpa]
+
+    myscore.save
+  end
+
+  def calculate_score(scores)
+    calculate_hash = {}
     temp_total_score = 0;
     temp_score_count = 0;
     scores.each do |score|
       temp_total_score += (score.value - Constants::HUKA_VALUE) * score.subject.weight
       temp_score_count += score.subject.weight
     end
-    #myscore.total_score = scores.sum(:value)
-    myscore.total_score = temp_total_score
-    #myscore.score_count = scores.count
-    myscore.score_count = temp_score_count
-    if myscore.score_count == 0
-      myscore.gpa = 0
-    else     
-      myscore.gpa = gpa_sum(scores)/myscore.score_count
+    calculate_hash[:total] = temp_total_score
+    calculate_hash[:count] = temp_score_count
+    
+    ### gpa
+    if calculate_hash[:count] == 0
+      calculate_hash[:gpa] = 0
+    else
+      calculate_hash[:gpa] = gpa_sum(scores)/calculate_hash[:count]
     end
-    #binding.pry
-    myscore.save
+
+    return calculate_hash
   end
   
   def gpa_sum(scores)
@@ -189,7 +218,7 @@ class MyscoresController < ApplicationController
 
 
   def user_score_params
-    params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0)
+    params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0, sem4_total_score: 0, sem4_gpa: 0, sem4_score_count: 0, sem5_total_score: 0, sem5_gpa: 0, sem5_score_count: 0, sem6_total_score: 0, sem6_gpa: 0, sem6_score_count: 0,)
   end
 
   def scores_params

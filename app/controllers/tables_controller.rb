@@ -14,6 +14,7 @@ class TablesController < ApplicationController
       subject.id
     end
 
+    #@user_scores_2A = @user_scores.sort{|a, b| a.sem4_total_score <=> b.sem4_total_score}
     @subjects_2A = @subjects.select{|subject| subject.semester == 4}
     @subject_ids_2A = @subjects_2A.map do |subject|
       subject.id
