@@ -96,9 +96,10 @@ class MyscoresController < ApplicationController
   def show
     #自分の点数たち
     @myscore = current_user.user_score
+    semester_user_scores = SemesterScore.all
 
     # 総合順位（点数）総合点
-    @user_scores = UserScore.all.order(total_score: :DESC)
+    @user_scores = UserScore.all.order(total_score: :DESC).includes(:semester_scores)
     stand_count_score = 1
     @user_scores.each do |user_score|
       if user_score.total_score > @myscore.total_score
@@ -110,7 +111,7 @@ class MyscoresController < ApplicationController
     @total_score_standing = stand_count_score
 
     # 総合順位（GPA）
-    user_scores_gpa = UserScore.all.order(gpa: :DESC)
+    user_scores_gpa = UserScore.all.order(gpa: :DESC).includes(:semester_scores)
     stand_count_gpa = 1
     user_scores_gpa.each do |user_score|
       if user_score.gpa > @myscore.gpa
@@ -123,7 +124,25 @@ class MyscoresController < ApplicationController
 
     ### semester毎の順位
     for num in 4..6 do
+      each_sem_user_scores = semester_user_scores.select{|sem| sem.semester == num}
+      my_sem_score = @myscore.semester_scores.find{|sem| sem.semester == num}
+      
       ### 総合順位
+      each_sem_totals = each_sem_user_scores.sort{|a, b| b.total_score <=> a.total_score}
+      temp_stand_count_score = 1
+      each_sem_totals.each do |user_score|
+        if user_score.total_score > my_sem_score.total_score
+          temp_stand_count_score += 1
+        else
+          break
+        end
+      end
+      var = "@sem#{num.to_s}_total_score_standing"
+      eval("#{var} = temp_stand_count_score")
+      var = "@sem#{num.to_s}_total_score"
+      eval("#{var} = my_sem_score.total_score")
+
+=begin
       temp_user_scores = @user_scores.sort{|a, b| b.send("sem#{num.to_s}_total_score") <=> a.send("sem"+num.to_s+"_total_score")}
       temp_stand_count_score = 1
       temp_user_scores.each do |user_score|
@@ -135,8 +154,24 @@ class MyscoresController < ApplicationController
       end
       var = "@sem#{num.to_s}_total_score_standing"
       eval("#{var} = temp_stand_count_score")
-      
+=end
+
       ### GPA
+      each_sem_gpas = each_sem_user_scores.sort{|a, b| b.gpa <=> a.gpa}
+      temp_stand_count_gpa = 1
+      each_sem_gpas.each do |user_score|
+        if user_score.gpa > my_sem_score.gpa
+          temp_stand_count_gpa += 1
+        else
+          break
+        end
+      end
+      var = "@sem#{num.to_s}_gpa_standing"
+      eval("#{var} = temp_stand_count_gpa")
+      var = "@sem#{num.to_s}_gpa"
+      eval("#{var} = my_sem_score.gpa")
+
+=begin
       temp_user_scores_gpa = @user_scores.sort{|a, b| b.send("sem"+num.to_s+"_gpa") <=> a.send("sem"+num.to_s+"_gpa")}
       temp_stand_count_gpa = 1
       temp_user_scores_gpa.each do |user_score|
@@ -148,6 +183,8 @@ class MyscoresController < ApplicationController
       end
       var = "@sem#{num.to_s}_gpa_standing"
       eval("#{var} = temp_stand_count_gpa")
+=end
+
     end
 
 

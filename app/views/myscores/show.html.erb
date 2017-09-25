@@ -25,40 +25,40 @@
     </tr>
     <tr>
       <td><strong>2Aセメ総合点数</strong></td>
-      <td><%= @myscore.sem4_total_score %>点</td>
+      <td><%= @sem4_total_score %>点</td>
       <td><strong>2Aセメ総合点数順位</strong></td>
       <%# binding.pry %>
       <td><%= @sem4_total_score_standing %>位/<%= @user_scores.size %>人中</td>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の2Aセメ総合点数は<%= @myscore.sem4_total_score %>点で、順位は<%= @user_scores.count %>人中<%= @sem4_total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の2Aセメ総合点数は<%= @sem4_total_score %>点で、順位は<%= @user_scores.count %>人中<%= @sem4_total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
     </tr>
     <tr>
       <td><strong>2AセメGPA</strong></td>
-      <td><%= @myscore.sem4_gpa %></td>
+      <td><%= @sem4_gpa %></td>
       <td><strong>2AセメGPA順位</strong></td>
       <td><%= @sem4_gpa_standing %>位/<%= @user_scores.count %>人中</td>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の2AセメGPAは<%= @myscore.sem4_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem4_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の2AセメGPAは<%= @sem4_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem4_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
     </tr>
     <tr>
       <td><strong>3Sセメ総合点数</strong></td>
-      <td><%= @myscore.sem5_total_score %>点</td>
+      <td><%= @sem5_total_score %>点</td>
       <td><strong>3Sセメ総合点数順位</strong></td>
       <%# binding.pry %>
       <td><%= @sem5_total_score_standing %>位/<%= @user_scores.size %>人中</td>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3Sセメ総合点数は<%= @myscore.sem5_total_score %>点で、順位は<%= @user_scores.count %>人中<%= @sem5_total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3Sセメ総合点数は<%= @sem5_total_score %>点で、順位は<%= @user_scores.count %>人中<%= @sem5_total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
     </tr>
     <tr>
       <td><strong>3SセメGPA</strong></td>
-      <td><%= @myscore.sem5_gpa %></td>
+      <td><%= @sem5_gpa %></td>
       <td><strong>3SセメGPA順位</strong></td>
       <td><%= @sem5_gpa_standing %>位/<%= @user_scores.count %>人中</td>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3SセメGPAは<%= @myscore.sem5_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem5_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3SセメGPAは<%= @sem5_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem5_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
     </tr>
   </tbody>
