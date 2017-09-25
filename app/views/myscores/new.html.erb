@@ -24,6 +24,8 @@
           <%= render 'new_each_form', subject: subject, s:s %>
         <% end %>
       <% end %>
+      <br>
+      <h3>次に上のタブから3Sセメスターの成績を登録しましょう。</h3>
     </div>
     <div class="tab-pane" id="semester5">
       <% @subjects.where(semester:5).each do |subject| %>
@@ -32,7 +34,9 @@
           <%= render 'new_each_form', subject: subject, s:s %>
         <% end %>
       <% end %>
+      <%= f.submit "点数登録" %>
     </div>
+
 
 <%
 =begin
@@ -81,5 +85,5 @@
 %>
   </div>
 
-  <%= f.submit "点数登録" %>
+  
 <% end %>

@@ -15,7 +15,7 @@
     <% if user_score.user_id == current_user.id %>
       <tr class="bg-info">
     <% elsif user_score.user.department.eql?("denjo") %>
-      <tr class="success">
+      <tr class="warning">
     <% elsif user_score.user.department.eql?("denden") %>
       <tr class="danger">
     <% else %>
