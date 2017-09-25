@@ -27,7 +27,6 @@ class MyscoresController < ApplicationController
 
   def create
     user_score_params_data = user_score_params
-    #binding.pry
     user_score_params_data[:scores_attributes].each do |key, value|
       unless value.key?(:value) then
         user_score_params_data[:scores_attributes][key][:registered] = "false"
@@ -37,7 +36,6 @@ class MyscoresController < ApplicationController
         end   
       end
     end
-    #binding.pry
 
     @myscore = UserScore.create(user_score_params_data)
     update_user_score_info(@myscore)
@@ -81,9 +79,6 @@ class MyscoresController < ApplicationController
     end
     #@myscore = current_user.user_score.includes(:semester_scores)
     @myscore = current_user.user_score
-    binding.pry
-    
-    #binding.pry
     @myscore.update(scores_params_data)
     update_user_score_info(@myscore)
     if @myscore.errors.any? 
@@ -145,7 +140,6 @@ class MyscoresController < ApplicationController
       temp_user_scores_gpa = @user_scores.sort{|a, b| b.send("sem"+num.to_s+"_gpa") <=> a.send("sem"+num.to_s+"_gpa")}
       temp_stand_count_gpa = 1
       temp_user_scores_gpa.each do |user_score|
-        #binding.pry
         if user_score.send("sem"+num.to_s+"_gpa") > @myscore.send("sem"+num.to_s+"_gpa")
           temp_stand_count_gpa += 1
         else
@@ -155,7 +149,6 @@ class MyscoresController < ApplicationController
       var = "@sem#{num.to_s}_gpa_standing"
       eval("#{var} = temp_stand_count_gpa")
     end
-    #binding.pry
 
 
     
@@ -165,11 +158,9 @@ class MyscoresController < ApplicationController
     @standings = Hash.new
     @scores.each do |score|
       if score.registered
-        #binding.pry
         this_subject_scores = score.subject.scores.where(registered: true).order(value: :DESC)
         stand_count = 1
         this_subject_scores.each do |this_sub_score|
-          #binding.pry
           if this_sub_score.value > score.value
             stand_count += 1
           else
