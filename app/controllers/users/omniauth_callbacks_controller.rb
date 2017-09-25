@@ -4,7 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if auth.info.team_id.eql?(ENV['SLACK_TEAM_ID'])
       @user = User.from_omniauth(auth)
     else 
-      flash[:alert]="チームIDが間違っています"
+      flash[:alert]="チームIDが間違っています。あなたのチームIDは#{auth.info.team_id}です。"
       redirect_to root_path
       return
     end
