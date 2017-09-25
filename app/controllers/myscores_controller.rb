@@ -196,7 +196,7 @@ class MyscoresController < ApplicationController
       temp_semester_score.save
     end
       
-
+=begin
     ### 2A
     sem4_scores = scores.select{|score| score.subject.semester == 4}
     sem4_score_hash = calculate_score(sem4_scores)    
@@ -217,6 +217,9 @@ class MyscoresController < ApplicationController
     myscore.sem6_gpa = sem6_score_hash[:gpa]
 
     myscore.save
+  
+=end
+
   end
 
   def calculate_score(scores)
@@ -258,7 +261,8 @@ class MyscoresController < ApplicationController
 
 
   def user_score_params
-    params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0, sem4_total_score: 0, sem4_gpa: 0, sem4_score_count: 0, sem5_total_score: 0, sem5_gpa: 0, sem5_score_count: 0, sem6_total_score: 0, sem6_gpa: 0, sem6_score_count: 0,)
+    #params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0, sem4_total_score: 0, sem4_gpa: 0, sem4_score_count: 0, sem5_total_score: 0, sem5_gpa: 0, sem5_score_count: 0, sem6_total_score: 0, sem6_gpa: 0, sem6_score_count: 0,)
+    params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered]).merge(user_id: current_user.id, total_score: 0, gpa: 0, score_count:0)
   end
 
   def scores_params

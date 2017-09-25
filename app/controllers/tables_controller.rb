@@ -4,7 +4,7 @@ class TablesController < ApplicationController
   before_action :registered_scores?
 
   def show
-    @user_scores = UserScore.all.includes([:user, :scores, :subjects]).order(total_score: :DESC)
+    @user_scores = UserScore.all.includes([:user, :scores, :subjects, :semester_scores]).order(total_score: :DESC)
     @subjects = Subject.all.order(:id)
 
     #@subject_ids = Array.new
@@ -14,13 +14,14 @@ class TablesController < ApplicationController
       subject.id
     end
 
-    @user_scores_2A = @user_scores.sort{|a, b| b.sem4_total_score <=> a.sem4_total_score}
+    binding.pry
+    @user_scores_2A = @user_scores.sort{|a, b| b.semester_scores.find{|sem| sem.semester == 4}.total_score <=> a.semester_scores.find{|sem| sem.semester == 4}.total_score}
     @subjects_2A = @subjects.select{|subject| subject.semester == 4}
     @subject_ids_2A = @subjects_2A.map do |subject|
       subject.id
     end
 
-    @user_scores_3S = @user_scores.sort{|a, b| b.sem5_total_score <=> a.sem5_total_score}
+    @user_scores_3S = @user_scores.sort{|a, b| b.semester_scores.find{|sem| sem.semester == 5}.total_score <=> a.semester_scores.find{|sem| sem.semester == 5}.total_score}
     @subjects_3S = @subjects.select{|subject| subject.semester == 5}
     @subject_ids_3S = @subjects_3S.map do |subject|
       subject.id
