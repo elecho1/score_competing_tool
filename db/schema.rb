@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924161736) do
+ActiveRecord::Schema.define(version: 20170925075148) do
 
   create_table "scores", force: :cascade do |t|
     t.integer  "user_score_id", limit: 4, null: false
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20170924161736) do
   end
 
   add_index "scores", ["user_score_id", "subject_id"], name: "index_scores_on_user_score_id_and_subject_id", unique: true, using: :btree
+
+  create_table "semester_scores", force: :cascade do |t|
+    t.integer  "user_score_id", limit: 4,                null: false
+    t.integer  "semester",      limit: 4,                null: false
+    t.float    "total_score",   limit: 24, default: 0.0, null: false
+    t.float    "gpa",           limit: 24, default: 0.0, null: false
+    t.float    "score_count",   limit: 24, default: 0.0, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
 
   create_table "subjects", force: :cascade do |t|
     t.string   "key",          limit: 255, null: false
