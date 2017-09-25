@@ -79,7 +79,9 @@ class MyscoresController < ApplicationController
         end   
       end
     end
+    #@myscore = current_user.user_score.includes(:semester_scores)
     @myscore = current_user.user_score
+    binding.pry
     
     #binding.pry
     @myscore.update(scores_params_data)
@@ -189,6 +191,21 @@ class MyscoresController < ApplicationController
     myscore.total_score = score_hash[:total]
     myscore.score_count = score_hash[:count]
     myscore.gpa = score_hash[:gpa]
+    myscore.save
+
+    semester_scores = myscore.semester_scores
+    for num in 4..6 do
+      sem_scores = scores.select{|score| score.subject.semester == num}
+      sem_score_hash = calculate_score(sem_scores)
+      temp_semester_score = myscore.semester_scores.where(semester: num).first_or_initialize(semester: num)
+      # できればここもSQL発行を最適化したい
+      temp_semester_score.total_score = sem_score_hash[:total]
+      temp_semester_score.score_count = sem_score_hash[:count]
+      temp_semester_score.gpa = sem_score_hash[:gpa]
+      temp_semester_score.save
+    end
+      
+
     ### 2A
     sem4_scores = scores.select{|score| score.subject.semester == 4}
     sem4_score_hash = calculate_score(sem4_scores)    
