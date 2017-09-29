@@ -36,35 +36,38 @@
           <%= render 'edit_each_form', s:s%>
         <% end %>
       <% end %>
-
-      <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" href="#subject1">
-        その他の科目
-      </a></h4>
-      </div>
-      <div id="subject1" class="row panel-collapse collapse">
-        <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 4) do |s| %>
-          <% if s.object.subject.subject_type != "all" &&  s.object.subject.subject_type != current_user.department %>
-            <%= render 'edit_each_form', s:s%>
+      <div class="panel-group">
+      <div class="panel-default">　
+        <div class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" href="#subject1">
+          その他の科目を表示
+          </a></h4>
+        </div>
+        <div id="subject1" class="row panel-collapse collapse">
+          <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 4) do |s| %>
+            <% if s.object.subject.subject_type != "all" &&  s.object.subject.subject_type != current_user.department %>
+              <%= render 'edit_each_form', s:s%>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
+    </div>
 
     </div>
 
 
     <div class="tab-pane" id="semester5">
       <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 5) do |s| %>
-
+  
         <% if s.object.subject.subject_type == "all" ||  s.object.subject.subject_type == current_user.department %>
           <%= render 'edit_each_form', s:s%>
         <% end %>
       <% end %>
-
+      <div class="panel-default">
       <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" href="#subject2">
-        その他の科目
-      </a></h4>
+        <h4 class="panel-title"><a data-toggle="collapse" href="#subject2">
+          その他の科目を表示
+        </a></h4>
       </div>
       <div id="subject2" class="row panel-collapse collapse">
         <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 5) do |s| %>
@@ -73,6 +76,7 @@
           <% end %>
         <% end %>
       </div>
+    </div>
     </div>
   </div>
 

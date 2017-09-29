@@ -22,7 +22,7 @@
       <tr>
     <% end %>
       <th><%= idx + 1 %></th>
-      
+
       <% if user_score.user.open_user_name %>
         <td><%= user_score.user.user_name %></td>
       <% else %>
@@ -49,7 +49,7 @@
           <%# end %>
           <% this_score = user_score.scores.find{|score| score.subject_id == subject_id} %>
           <%##### finish #####%>
-  
+
           <% if this_score.registered %>
             <% if this_score.nil? %>
               <td class="font-weight-bolder"> </td>
@@ -57,7 +57,7 @@
               <td class="font-weight-bolder"><%= score_evaluate(this_score.value) %></td>
             <% end %>
           <% else %>
-            <td>未受講</td>
+            <td><span class="font-weight-bolder">未受講</span></td>
           <% end %>
         <% end %>
       <% else %>
@@ -68,5 +68,5 @@
     </tr>
   <% end %>
   </tbody>
-  
+
 </table>

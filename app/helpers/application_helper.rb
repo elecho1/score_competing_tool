@@ -21,12 +21,16 @@ module ApplicationHelper
       html += <<-BOF4
         <span class="text-orange">可</span>
       BOF4
-    else
+    elsif score >= Constants::HUKA_VALUE
       html += <<-BOF5
         <span class="text-red">不可</span>
       BOF5
+    else
+      html += <<-BOF6
+        <span>未受講</span>
+      BOF6
     end
     html.html_safe
   end
-  
+
 end
