@@ -15,4 +15,4 @@
 # Ignore ENV
 /.env
 
-config/database.yml
+/config/database.yml
