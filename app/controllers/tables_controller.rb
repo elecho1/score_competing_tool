@@ -9,6 +9,28 @@ class TablesController < ApplicationController
 
     @semester_scores = SemesterScore.all
 
+    # 総合得点グラフの描画用
+    @my_total_score = UserScore.find{|data| data.user_id == current_user.id}.total_score
+    @user_scores_max = @user_scores[0].total_score
+    @user_scores_min = @user_scores[@user_scores.length - 1].total_score
+    @label_interval = (@user_scores_max -   @user_scores_min) / 10
+    @user_scores_number = @user_scores.map do |data|
+      data.total_score
+    end
+    @label_count = @user_scores_number.group_by{|data| ((data -  @user_scores_min)/@label_interval).floor}
+    @label_count_num = []
+    for num in 0..10 do
+      unless @label_count[num].nil?
+        @label_count_num.push(@label_count[num].length)
+      else
+        @label_count_num.push(0)
+      end
+    end
+
+
+
+
+
     #@subject_ids = Array.new
     #@subject_ids = @subjects.pluck(:id)
 

@@ -1,6 +1,8 @@
 <h2>みんなの点数</h2>
 
-<%= link_to "評価の分布はこちら", distribution_graph_path, class:"btn btn-info margin-5px" %>
+<%= render 'score_sum_graph'%>
+
+<%= link_to "各科目の評価の分布はこちら", distribution_graph_path, class:"btn btn-info margin-5px" %>
 
 <h3>注意</h3>
 <ul>
