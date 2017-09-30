@@ -25,39 +25,26 @@
   </div>
 <% end %>
 <br>
-<h2>新規・改良機能(9/25更新)</h2>
+<h2>新規・改良機能(9/30更新)</h2>
 <ul>
-  <li>Slack認証導入・ログインID廃止・ベーシック認証廃止</li>
-  <li>電電・電情の登録導入</li>
-  <li>科目のセメスター毎の識別対応</li>
-  <li>セメスター毎の合計点・GPAの計算対応</li>
+  <li>ナビゲーションバーの表示の変更</li>
+</ul>
+<b>また、以下はすぎやんが手伝ってくれた成果です！！</b></br>
+<ul>
+  <li>点数登録時に他学科の点数をデフォルトでは表示しないようにする</li>
+  <li>未受講の選択をチェックボックスからボタンに変更</li>
 </ul>
 </br>
-<h2>機能改修チケット(9/27更新)</h2>
+<h2>機能改修チケット</h2>
 <div>
 （作者は10月中旬まで時間がない可能性があるので、追加機能を実装してくださる方はぜひご協力お願いします！）</br>
 ソースコードはこちら→<%= link_to "https://github.com/elecho1/score_competing_tool/" , "https://github.com/elecho1/score_competing_tool/", target:"_blank" %></br>
 チケット一覧はこちら→<%= link_to "https://github.com/elecho1/score_competing_tool/issues" , "https://github.com/elecho1/score_competing_tool/issues", target:"_blank" %></br>
-<ul>
-  <li>志望研究室登録</li>
-  <li>取得単位数・卒業までに必要な単位数を表示</li>
-  <li>ロゴ・各種タイトルの変更</li>
-  <li>点数一覧表で総合点数の代わりにセメスター毎の合計点数を表示</li>
-  <li>セメスター毎のタブを上だけでなく下でも切り替えれるようにする</li>
-  <li>科目ごとに全体科目・電電科目・電情科目のどれであるか簡単に分かるようにする（すでに内部で識別可能）</li>
-  <li>点数登録時に所属学科の科目以外をデフォルトでは表示しない</li>
-  <li>点数登録における未受講選択欄の視認性・操作性向上</li>
-  <li>UTASの成績ページから成績の表をJSONやCSVに変換するブラウザプラグイン作成</li>
-  <li>「自分の点数」を表示する際のSQL文数の改善</li>
-  <li>（他学科向けのプラットフォーム化）</li>
-</ul>
 </br>
 <h3>現状の不具合</h3>
 <ul>
   <li>他チームのSlackにログインしたまま認証しようとすると、「OAuth Error: invalid_team_for_non_distributed_app」と表示されます。</br>
   お手数ですが、EEICのSlackにもログインしてから再度認証画面に進んで下さい</li>
 </ul>
-
 </br>
-
 </div>

@@ -64,23 +64,38 @@ body {
 }
 
 .btn-danger:active, .btn-danger.active{
+  color: #ffff00;
   background-color: #A61D13;
   border-color: #A60F05;
 }
 .btn-warning:active, .btn-warning.active{
-  color: #fff;
+  color: #ffff00;
   background-color: #B06A01;
   border-color: #9A5D01;
 }
 .btn-success:active, .btn-success.active {
+  color: #ffff00;
   background-color: #28672C;
   border-color: #205423;
 }
 .btn-info:active, .btn-info.active {
+  color: #ffff00;
   background-color: #1E697F;
   border-color: #1A5B6F;
 }
 .btn-primary:active, .btn-primary.active {
+  color: #ffff00;
   background-color: #143B5D;
   border-color: #11324F;
+}
+.btn-defalut:active, .btn-default.active {
+  color: #ffff00;
+}
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    color: #ffff00;
 }

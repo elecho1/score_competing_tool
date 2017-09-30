@@ -9,7 +9,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home", root_path %></li>
+          <!-- <li><%= link_to "Home", root_path %></li> -->
 					<li><%= link_to "about", about_path %></li>
           <% unless user_signed_in? %>
           <li><%= link_to image_tag('sign_in_with_slack.png') , user_slack_omniauth_authorize_path , class:"padding-top-0 padding-bottom-0"%></li>
@@ -22,17 +22,20 @@
 =end
           %>
           <% else %>
+            <% if current_user.user_score.present?%>
+  			  		<li><%= link_to "自分の点数", myscores_path %></li>
+              <li><%= link_to "みんなの点数一覧表", table_path %></li>
+							<li><%= link_to "評価の分布", distribution_graph_path %>
+            <% else %>
+              <li><%= link_to "点数登録", new_myscores_path %></li>
+            <% end %>
+            
   					<li class="dropdown">
 	  					<a href="#" class="dropdown-toggle" data-toggle="dropdown">設定<b class="caret"></b></a>
 		  				<ul class="dropdown-menu">
 			  				<li><%= link_to "アカウント情報確認", users_profile_path %></li>
                 <% if current_user.user_score.present?%>
-  			  				<li><%= link_to "自分の点数", myscores_path %></li>
-                  <li><%= link_to "点数更新", edit_myscores_path %></li>
-                  <li><%= link_to "みんなの点数一覧表", table_path %></li>
-									<li><%= link_to "評価の分布", distribution_graph_path %>
-                <% else %>
-                  <li><%= link_to "点数登録", new_myscores_path %></li>
+  			  			  <li><%= link_to "点数更新", edit_myscores_path %></li>
                 <% end %>
 						  </ul>
 					  </li>

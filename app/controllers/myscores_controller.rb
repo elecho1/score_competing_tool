@@ -31,17 +31,19 @@ class MyscoresController < ApplicationController
       unless value.key?(:value) then
         user_score_params_data[:scores_attributes][key][:registered] = "false"
       else
-        if value[:registered].eql?("false") then
+        user_score_params_data[:scores_attributes][key][:registered] = "true"
+        if value[:registered].eql?("false") || value[:value].to_i <= Constants::MIJUKOU_VALUE then
           user_score_params_data[:scores_attributes][key].delete(:value)
-        end   
+          user_score_params_data[:scores_attributes][key][:registered] = "false"
+        end
       end
     end
 
     @myscore = UserScore.create(user_score_params_data)
     update_user_score_info(@myscore)
-    if @myscore.errors.any? 
+    if @myscore.errors.any?
       flash[:error_num] = @myscore.errors.count
-      flash[:error_msgs] = @myscore.errors.full_messages 
+      flash[:error_msgs] = @myscore.errors.full_messages
       #redirect_to new_myscores_path
       @subjects = Subject.all.order(:id)
       redirect_to action: :new
@@ -64,26 +66,36 @@ class MyscoresController < ApplicationController
     #@myscore.scores.build
     #@subjects = Subject.all.order(:id)
     @scores = @myscore.scores.order(:subject_id).includes(:subject)
+    @scores.each_with_index do |s, idx|
+      unless s.value? && s.registered? then
+        @scores[idx] = Constants::MIJUKOU_VALUE
+      end
+    end
+
   end
-  
+
   def update
     scores_params_data = scores_params
     scores_params_data[:scores_attributes].each do |key, value|
-      unless value.key?(:value) then
-        scores_params_data[:scores_attributes][key][:registered] = "false"
-      else
-        if value[:registered].eql?("false") then
+      if value.key?(:value)
+        if value[:value].to_i <= Constants::MIJUKOU_VALUE
+          scores_params_data[:scores_attributes][key][:registered] = "false"
           scores_params_data[:scores_attributes][key][:value] = nil
-        end   
+        else
+          scores_params_data[:scores_attributes][key][:registered] = "true"
+        end
+      else 
+        scores_params_data[:scores_attributes][key][:registered] = "false"
+        scores_params_data[:scores_attributes][key][:value] = nil
       end
     end
     #@myscore = current_user.user_score.includes(:semester_scores)
     @myscore = current_user.user_score
     @myscore.update(scores_params_data)
     update_user_score_info(@myscore)
-    if @myscore.errors.any? 
+    if @myscore.errors.any?
       flash[:error_num] = @myscore.errors.count
-      flash[:error_msgs] = @myscore.errors.full_messages 
+      flash[:error_msgs] = @myscore.errors.full_messages
       #redirect_to new_myscores_path
       @subjects = Subject.all.order(:id)
       render :edit
@@ -126,7 +138,7 @@ class MyscoresController < ApplicationController
     for num in 4..6 do
       each_sem_user_scores = semester_user_scores.select{|sem| sem.semester == num}
       my_sem_score = @myscore.semester_scores.find{|sem| sem.semester == num}
-      
+
       ### 総合順位
       each_sem_totals = each_sem_user_scores.sort{|a, b| b.total_score <=> a.total_score}
       temp_stand_count_score = 1
@@ -188,7 +200,7 @@ class MyscoresController < ApplicationController
     end
 
 
-    
+
     # 各科目の順位
     @scores = @myscore.scores.includes(subject: :scores)
     @subjects = @myscore.subjects.order(:id)
@@ -203,7 +215,7 @@ class MyscoresController < ApplicationController
           else
             break
           end
-        end 
+        end
         @standings[score.id] = {standing: stand_count, number: this_subject_scores.size}
       end
     end
@@ -215,7 +227,7 @@ class MyscoresController < ApplicationController
     #current_user_score = current_user.user_score
     ### total
     scores = myscore.scores.where(registered: true).includes(:subject)
-    score_hash = calculate_score(scores)    
+    score_hash = calculate_score(scores)
     myscore.total_score = score_hash[:total]
     myscore.score_count = score_hash[:count]
     myscore.gpa = score_hash[:gpa]
@@ -232,29 +244,29 @@ class MyscoresController < ApplicationController
       temp_semester_score.gpa = sem_score_hash[:gpa]
       temp_semester_score.save
     end
-      
+
 =begin
     ### 2A
     sem4_scores = scores.select{|score| score.subject.semester == 4}
-    sem4_score_hash = calculate_score(sem4_scores)    
+    sem4_score_hash = calculate_score(sem4_scores)
     myscore.sem4_total_score = sem4_score_hash[:total]
     myscore.sem4_score_count = sem4_score_hash[:count]
     myscore.sem4_gpa = sem4_score_hash[:gpa]
     ### 3S
     sem5_scores = scores.select{|score| score.subject.semester == 5}
-    sem5_score_hash = calculate_score(sem5_scores)    
+    sem5_score_hash = calculate_score(sem5_scores)
     myscore.sem5_total_score = sem5_score_hash[:total]
     myscore.sem5_score_count = sem5_score_hash[:count]
     myscore.sem5_gpa = sem5_score_hash[:gpa]
     ### 3A
     sem6_scores = scores.select{|score| score.subject.semester == 6}
-    sem6_score_hash = calculate_score(sem6_scores)    
+    sem6_score_hash = calculate_score(sem6_scores)
     myscore.sem6_total_score = sem6_score_hash[:total]
     myscore.sem6_score_count = sem6_score_hash[:count]
     myscore.sem6_gpa = sem6_score_hash[:gpa]
 
     myscore.save
-  
+
 =end
 
   end
@@ -264,12 +276,14 @@ class MyscoresController < ApplicationController
     temp_total_score = 0;
     temp_score_count = 0;
     scores.each do |score|
-      temp_total_score += (score.value - Constants::HUKA_VALUE) * score.subject.weight
-      temp_score_count += score.subject.weight
+      unless score.value <= Constants::MIJUKOU_VALUE
+        temp_total_score += (score.value - Constants::HUKA_VALUE) * score.subject.weight
+        temp_score_count += score.subject.weight
+      end
     end
     calculate_hash[:total] = temp_total_score
     calculate_hash[:count] = temp_score_count
-    
+
     ### gpa
     if calculate_hash[:count] == 0
       calculate_hash[:gpa] = 0
@@ -279,7 +293,7 @@ class MyscoresController < ApplicationController
 
     return calculate_hash
   end
-  
+
   def gpa_sum(scores)
     sum = 0
     scores.each do |score|
@@ -307,7 +321,7 @@ class MyscoresController < ApplicationController
     #params.permit(score: [:value, :registered])[:score]
     params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered, :id])
   end
-  
+
   #def scores_params
   #  params.require(:score).map do |params|
   #    ActionController::Parameters.new(params.to_hash).permit(:value, :id)
@@ -320,5 +334,5 @@ class MyscoresController < ApplicationController
       return
     end
   end
-  
+
 end

@@ -24,12 +24,21 @@
               <label class="btn btn-danger button-setting">
                 <%= s.radio_button :value, Constants::HUKA_VALUE, {} %>不可
               </label>
+              <label class="btn btn-default button-setting">
+                <%= s.radio_button :value, Constants::MIJUKOU_VALUE, {} %>未受講
+              </label>
             </div>
 
+<%
+=begin
+%>
             <div class="col-xs-6 col-xs-offset-4 col-sm-3 col-sm-offset-0">
               <%= s.label :registered, t('view.notregistered'), class: "control-label" %>
               <%= s.check_box :registered, {checked: false}, checked_value = "false", unchecked_value = "true" %>
             </div>
+<%
+=end
+%>
 
             <%= s.hidden_field :subject_id, value: subject.id %>
           </div>

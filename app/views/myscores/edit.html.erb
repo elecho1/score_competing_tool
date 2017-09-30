@@ -1,13 +1,12 @@
 <%#= form_tag (myscore_path(current_user.user_score.id), method: "patch") do %>
-<%#= form_tag ({controller: :myscores, action: :update}, method: "patch") do %> 
-
+<%#= form_tag ({controller: :myscores, action: :update}, method: "patch") do %>
 
 <h2>点数更新</h2>
 <h3>点数登録のやり方</h3>
 <ul>
-  <li>点数は、優上：95点、優：85点、良：75点、可：65点として換算されます。（総合点数の計算では可の最低点が引かれます。）</li>
-  <li>未受講の科目は、未受講の欄にチェックを入れて下さい。</li>
-  <li><b>（受講した科目に点数を登録する際は未受講のチェックが外れていることを確認して下さい！！）</b></li>
+  <li>点数は、優上：95点、優：85点、良：75点、可：65点として換算されます。（総合点数の計算では可の最低点60点が引かれます。）</li>
+  <!--<li>未受講の科目は、未受講の欄にチェックを入れて下さい。</li>
+  <li><b>（受講した科目に点数を登録する際は未受講のチェックが外れていることを確認して下さい！！）</b></li> -->
   <li><b><font size="+2">3Sセメスターの登録を忘れずに！！！</font></b></li>
 </ul>
 
@@ -22,32 +21,64 @@
 <%# flash errors for scores %>
 <%= render partial: 'layouts/scores_errors' %>
 
-<%= form_for @myscore, url: {action: 'update'}, html: {class:"form-horizontal"} do |f|%>  
+<%= form_for @myscore, url: {action: 'update'}, html: {class:"form-horizontal"} do |f|%>
   <ul class="nav nav-tabs">
     <li class="active"><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
     <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
   </ul>
 
   <div class="tab-content">
+
     <div class="tab-pane active" id="semester4">
       <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 4) do |s| %>
-      <%#= f.fields_for @myscore.scores do |s|%>
-        <%# @subjects.each do |subject| %>
+
+        <% if s.object.subject.subject_type == "all" ||  s.object.subject.subject_type == current_user.department %>
           <%= render 'edit_each_form', s:s%>
-        <%# end %>
+        <% end %>
       <% end %>
+      <div class="panel-group">
+      <div class="panel-default">　
+        <div class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" href="#subject1">
+          その他の科目を表示
+          </a></h4>
+        </div>
+        <div id="subject1" class="row panel-collapse collapse">
+          <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 4) do |s| %>
+            <% if s.object.subject.subject_type != "all" &&  s.object.subject.subject_type != current_user.department %>
+              <%= render 'edit_each_form', s:s%>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
+
+    </div>
+
+
     <div class="tab-pane" id="semester5">
       <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 5) do |s| %>
-      <%#= f.fields_for @myscore.scores do |s|%>
-        <%# @subjects.each do |subject| %>
+  
+        <% if s.object.subject.subject_type == "all" ||  s.object.subject.subject_type == current_user.department %>
           <%= render 'edit_each_form', s:s%>
-        <%# end %>
+        <% end %>
       <% end %>
+      <div class="panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#subject2">
+          その他の科目を表示
+        </a></h4>
+      </div>
+      <div id="subject2" class="row panel-collapse collapse">
+        <%= f.fields_for :scores, @scores.joins(:subject).where("subjects.semester = ?", 5) do |s| %>
+          <% if s.object.subject.subject_type != "all" &&  s.object.subject.subject_type != current_user.department %>
+            <%= render 'edit_each_form', s:s%>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
     </div>
   </div>
 
   <%= f.submit "点数更新" %>
 <% end %>
-
-

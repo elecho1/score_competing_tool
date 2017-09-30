@@ -1,7 +1,7 @@
 <h2>点数登録</h2>
 <h3>点数登録のやり方</h3>
 <ul>
-  <li>点数は、優上：95点、優：85点、良：75点、可：65点として換算されます。（総合点数の計算では可の最低点が引かれます。）</li>
+  <li>点数は、優上：95点、優：85点、良：75点、可：65点として換算されます。（総合点数の計算では可の最低点60点が引かれます。）</li>
   <li>未受講の科目は、未受講の欄にチェックを入れて下さい。</li>
   <li>（評定を何も選択していない場合も、未受講として扱われます。）</li>
 </ul>
@@ -18,26 +18,65 @@
 
   <div class="tab-content">
     <div class="tab-pane active" id="semester4">
-      <% @subjects.where(semester:4).each do |subject| %>
+      <% @subjects.where(semester: 4).where(subject_type: ["all", current_user.department]).each do |subject| %>
         <!--各科目の記入欄-->
         <%= f.fields_for :scores do |s| %>
           <%= render 'new_each_form', subject: subject, s:s %>
         <% end %>
       <% end %>
+
+      <div class="panel-group">
+      <div class="panel-default">　
+        <div class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" href="#subject1">
+          その他の科目を表示
+          </a></h4>
+        </div>
+        <div id="subject1" class="row panel-collapse collapse">
+          <% @subjects.where(semester: 4).where.not(subject_type: ["all", current_user.department]).each do |subject| %>
+            <!--各科目の記入欄-->
+            <%= f.fields_for :scores do |s| %>
+              <%= render 'new_each_form', subject: subject, s:s %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      </div>
       <br>
       <h3>次に上のタブから3Sセメスターの成績を登録しましょう。</h3>
     </div>
     <div class="tab-pane" id="semester5">
-      <% @subjects.where(semester:5).each do |subject| %>
+      <%# @subjects.where(semester:5).each do |subject| %>
+      <% @subjects.where(semester: 5).where(subject_type: ["all", current_user.department]).each do |subject| %>
         <!--各科目の記入欄-->
         <%= f.fields_for :scores do |s| %>
           <%= render 'new_each_form', subject: subject, s:s %>
         <% end %>
       <% end %>
-      <%= f.submit "点数登録" %>
+
+
+      <div class="panel-group">
+      <div class="panel-default">　
+        <div class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" href="#subject2">
+          その他の科目を表示
+          </a></h4>
+        </div>
+        <div id="subject2" class="row panel-collapse collapse">
+          <% @subjects.where(semester: 5).where.not(subject_type: ["all", current_user.department]).each do |subject| %>
+            <!--各科目の記入欄-->
+            <%= f.fields_for :scores do |s| %>
+              <%= render 'new_each_form', subject: subject, s:s %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      </div>
+
+      <%= f.submit "点数登録" %>      
     </div>
 
-
+    
 <%
 =begin
 %>
