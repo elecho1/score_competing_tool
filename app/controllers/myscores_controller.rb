@@ -31,11 +31,10 @@ class MyscoresController < ApplicationController
       unless value.key?(:value) then
         user_score_params_data[:scores_attributes][key][:registered] = "false"
       else
-        if value[:registered].eql?("false") then
+        user_score_params_data[:scores_attributes][key][:registered] = "true"
+        if value[:registered].eql?("false") || value[:value].to_i <= Constants::MIJUKOU_VALUE then
           user_score_params_data[:scores_attributes][key].delete(:value)
-        end
-        if value[:value] >= 50 then
-          user_score_params_data[:scores_attributes][key][:registered] = "true"
+          user_score_params_data[:scores_attributes][key][:registered] = "false"
         end
       end
     end
@@ -67,9 +66,9 @@ class MyscoresController < ApplicationController
     #@myscore.scores.build
     #@subjects = Subject.all.order(:id)
     @scores = @myscore.scores.order(:subject_id).includes(:subject)
-    @scores.each do |s|
-      unless s.value? then
-        s.value = 50
+    @scores.each_with_index do |s, idx|
+      unless s.value? && s.registered? then
+        @scores[idx] = Constants::MIJUKOU_VALUE
       end
     end
 
@@ -78,15 +77,16 @@ class MyscoresController < ApplicationController
   def update
     scores_params_data = scores_params
     scores_params_data[:scores_attributes].each do |key, value|
-      if value.key?(:value) then
-        scores_params_data[:scores_attributes][key][:registered] = "true"
-      end
-      unless value.key?(:value) then
-        scores_params_data[:scores_attributes][key][:registered] = "false"
-      else
-        if value[:registered].eql?("false") then
+      if value.key?(:value)
+        if value[:value].to_i <= Constants::MIJUKOU_VALUE
+          scores_params_data[:scores_attributes][key][:registered] = "false"
           scores_params_data[:scores_attributes][key][:value] = nil
+        else
+          scores_params_data[:scores_attributes][key][:registered] = "true"
         end
+      else 
+        scores_params_data[:scores_attributes][key][:registered] = "false"
+        scores_params_data[:scores_attributes][key][:value] = nil
       end
     end
     #@myscore = current_user.user_score.includes(:semester_scores)
@@ -276,7 +276,7 @@ class MyscoresController < ApplicationController
     temp_total_score = 0;
     temp_score_count = 0;
     scores.each do |score|
-      unless score.value.eql?(50) then
+      unless score.value <= Constants::MIJUKOU_VALUE
         temp_total_score += (score.value - Constants::HUKA_VALUE) * score.subject.weight
         temp_score_count += score.subject.weight
       end

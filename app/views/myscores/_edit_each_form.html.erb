@@ -9,7 +9,7 @@
         </div>
         -->
         <div class="col-xs-8 col-sm-6 btn-group text-center" data-toggle="buttons">
-        <% if s.object.value.blank? %>
+        <% if s.object.value.blank? || !s.object.registered %>
           <!-- 優上 -->
           <label class="btn btn-primary button-setting">
             <%= s.radio_button :value, Constants::YUJYOU_VALUE, {} %>優上
@@ -26,9 +26,11 @@
           <label class="btn btn-warning button-setting">
             <%= s.radio_button :value, Constants::KA_VALUE, {} %>可
           </label>
+          <!-- 不可 -->
           <label class="btn btn-danger button-setting">
             <%= s.radio_button :value, Constants::HUKA_VALUE, {} %>不可
           </label>
+          <!-- 未受講 -->
           <label class="btn btn-default button-setting active">
             <%= s.radio_button :value, Constants::MIJUKOU_VALUE, {} %>未受講
           </label>
