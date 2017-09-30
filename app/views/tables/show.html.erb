@@ -34,14 +34,14 @@
 <div class="tab-content">
   <!-- All -->
   <div class="tab-pane active" id="semesterall">
-    <%= render 'each_table', subjects: @subjects, subject_ids: @subject_ids, user_scores: @user_scores %>
+    <%= render 'each_table', subjects: @subjects, subject_ids: @subject_ids, user_scores: @user_scores, semester: 0 %>
   </div>
   <!-- 2A -->
   <div class="tab-pane" id="semester4">
-    <%= render 'each_table', subjects: @subjects_2A, subject_ids: @subject_ids_2A, user_scores: @user_scores_2A %>
+    <%= render 'each_table', subjects: @subjects_2A, subject_ids: @subject_ids_2A, user_scores: @user_scores_2A, semester: 4 %>
   </div>
   <!-- 3S -->
   <div class="tab-pane" id="semester5">
-    <%= render 'each_table', subjects: @subjects_3S, subject_ids: @subject_ids_3S, user_scores: @user_scores_3S %>
+    <%= render 'each_table', subjects: @subjects_3S, subject_ids: @subject_ids_3S, user_scores: @user_scores_3S, semester: 5 %>
   </div>
 </div>
