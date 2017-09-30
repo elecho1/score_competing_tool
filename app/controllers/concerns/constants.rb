@@ -4,4 +4,5 @@ module Constants
   RYOU_VALUE = 75
   KA_VALUE = 65
   HUKA_VALUE = 60
+  MIJUKOU_VALUE = 40
 end

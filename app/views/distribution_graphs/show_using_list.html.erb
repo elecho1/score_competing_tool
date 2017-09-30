@@ -20,7 +20,7 @@
 <h2>各科目の評価の分布</h2>
 <div class="panel-group">
 <ul class="list-group">
-<% @subjects.each do |subject| %> 
+<% @subjects.each do |subject| %>
 <li class="list-group-item">
   <div class="panel panel-default">
   <div class="panel-heading">
@@ -60,11 +60,11 @@
               ],
               borderWidth: 1.2,
               data: [
-                <%= @subject_eval_count[subject.id][:yujyou_count] %>, 
-                <%= @subject_eval_count[subject.id][:yu_count] %>, 
-                <%= @subject_eval_count[subject.id][:ryou_count] %>, 
-                <%= @subject_eval_count[subject.id][:ka_count] %>, 
-                <%= @subject_eval_count[subject.id][:huka_count] %>, 
+                <%= @subject_eval_count[subject.id][:yujyou_count] %>,
+                <%= @subject_eval_count[subject.id][:yu_count] %>,
+                <%= @subject_eval_count[subject.id][:ryou_count] %>,
+                <%= @subject_eval_count[subject.id][:ka_count] %>,
+                <%= @subject_eval_count[subject.id][:huka_count] %>,
                 <%= @subject_eval_count[subject.id][:mijyukou_count] %>
               ]
             }
@@ -81,11 +81,11 @@
                   return "<%= subject.key %>: "+ tooltipItem.xLabel + "人";
                 }
               }
-            },        
+            },
             legend: {
               display: false
             },
-            scales: {     
+            scales: {
               xAxes: [{
                 ticks: {
                   /*
@@ -99,7 +99,7 @@
                   zeroLineWidth: 2,
                   zeroLineColor: "rgba(0, 0, 0, 0.25)",
                   color: "rgba(0, 0, 0, 0.15)"
-                }, 
+                },
                 //stacked: true
               }],
               yAxes: [{
@@ -112,7 +112,7 @@
                   zeroLineWidth: 2,
                   zeroLineColor: "rgba(0, 0, 0, 0.25)",
                   color: "rgba(0, 0, 0, 0.15)"
-                },  
+                },
               }]
             }
           }
@@ -127,4 +127,3 @@
 <% end %>
 </ul>
 </div>
-
