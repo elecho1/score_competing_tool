@@ -4,11 +4,15 @@
     <th>順位</th>
     <th>名前</th>
     <th>総合点数</th>
+    <% if semester != 0 %>
+    <th>セメスター別点数</th>
+    <% end %>
     <% subjects.each do |subject| %>
       <th><%= subject.key %> </th>
     <% end %>
   </tr>
   </thead>
+
 
   <tbody>
   <% user_scores.each_with_index do |user_score, idx| %>
@@ -30,7 +34,11 @@
       <% end %>
 
       <% if user_score.user.open_score %>
-        <td><%= user_score.total_score %></td>
+          <td><%= user_score.total_score %></td>
+        <% if semester != 0 %>
+          <% semester_score = @semester_scores.find{|data| data.user_score_id == user_score.id and data.semester == semester} %>
+          <td><%= semester_score.total_score %></td>
+        <%end %>
       <% else %>
         <td> - </td>
       <% end %>
