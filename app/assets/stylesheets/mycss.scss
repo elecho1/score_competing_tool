@@ -132,3 +132,10 @@ hr.style-four {
 .panel-collapse {
   padding: 15px;
 }
+
+.thead-th {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
