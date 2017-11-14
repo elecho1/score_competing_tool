@@ -15,6 +15,7 @@ class MyscoresController < ApplicationController
     @myscore.scores.build
     @subjects = Subject.all.order(:id)
 
+    @user = current_user
     @lab = nil
     @labs = Lab.all
 
@@ -29,7 +30,7 @@ class MyscoresController < ApplicationController
   # !!!!! バリデーション部要整形 !!!!
 
   def create
-    @lab = Lab.find_by(id: lab_params[:lab_id])
+    @lab = Lab.find_by(id: lab_params[:user][:lab_id])
     @labs = Lab.all
     current_user.update!(lab: @lab)
     
@@ -82,10 +83,12 @@ class MyscoresController < ApplicationController
 
     @lab = current_user.lab
     @labs = Lab.all
+    @user = current_user
   end
 
   def update
-    @lab = Lab.find_by(id: lab_params[:lab_id])
+    binding.pry
+    @lab = Lab.find_by(id: lab_params[:user][:lab_id])
     @labs = Lab.all
     current_user.update!(lab: @lab)
 
@@ -338,7 +341,7 @@ class MyscoresController < ApplicationController
   end
 
   def lab_params
-    params.require(:user_score).permit(:lab_id)
+    params.require(:user_score).permit(user: [:lab_id])
   end
 
   #def scores_params
