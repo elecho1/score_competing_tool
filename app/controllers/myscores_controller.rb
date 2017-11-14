@@ -15,6 +15,9 @@ class MyscoresController < ApplicationController
     @myscore.scores.build
     @subjects = Subject.all.order(:id)
 
+    @lab = nil
+    @labs = Lab.all
+
     #@subjects = Subject.all.order(:id)
     #@scores
     #@subjects.each do |subject|
@@ -26,6 +29,10 @@ class MyscoresController < ApplicationController
   # !!!!! バリデーション部要整形 !!!!
 
   def create
+    @lab = Lab.find_by(id: lab_params[:lab_id])
+    @labs = Lab.all
+    current_user.update!(lab: @lab)
+    
     user_score_params_data = user_score_params
     user_score_params_data[:scores_attributes].each do |key, value|
       unless value.key?(:value) then
@@ -49,6 +56,7 @@ class MyscoresController < ApplicationController
       redirect_to action: :new
       return
     end
+
     #@myscore = UserScore.new.()
     #@myscore.user = current_user
     #@myscore.gpa = 0
@@ -72,9 +80,15 @@ class MyscoresController < ApplicationController
       end
     end
 
+    @lab = current_user.lab
+    @labs = Lab.all
   end
 
   def update
+    @lab = Lab.find_by(id: lab_params[:lab_id])
+    @labs = Lab.all
+    current_user.update!(lab: @lab)
+
     scores_params_data = scores_params
     scores_params_data[:scores_attributes].each do |key, value|
       if value.key?(:value)
@@ -84,7 +98,7 @@ class MyscoresController < ApplicationController
         else
           scores_params_data[:scores_attributes][key][:registered] = "true"
         end
-      else 
+      else
         scores_params_data[:scores_attributes][key][:registered] = "false"
         scores_params_data[:scores_attributes][key][:value] = nil
       end
@@ -101,6 +115,7 @@ class MyscoresController < ApplicationController
       render :edit
       return
     end
+
     redirect_to action: :show
     return
   end
@@ -320,6 +335,10 @@ class MyscoresController < ApplicationController
     #params.require(:score).map { |u| u.permit(:value) }
     #params.permit(score: [:value, :registered])[:score]
     params.require(:user_score).permit(scores_attributes: [:value, :subject_id, :registered, :id])
+  end
+
+  def lab_params
+    params.require(:user_score).permit(:lab_id)
   end
 
   #def scores_params
