@@ -11,6 +11,10 @@
 <%= render partial: 'layouts/scores_errors' %>
 
 <%= form_for @myscore, url: {action: 'create'}, html: {class:"form-horizontal"} do |f|%>
+  <div class="aspiring-lab">
+    <%= f.select :lab_id, @labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true, selected: @lab.id %>
+  </div>
+
   <ul class="nav nav-tabs">
     <li class="active"><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
     <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
@@ -73,16 +77,16 @@
       </div>
       </div>
 
-      <%= f.submit "点数登録" %>      
+      <%= f.submit "点数登録" %>
     </div>
 
-    
+
 <%
 =begin
 %>
   <% @subjects.each do |subject| %>
     <%= f.fields_for :scores do |s| %>
-    
+
       <div class="form-group">
         <%= s.label :value, subject.key, class: "control-label col-xs-4 col-sm-4" %>
         <!-- 点数の入力欄 -->
@@ -124,5 +128,5 @@
 %>
   </div>
 
-  
+
 <% end %>
