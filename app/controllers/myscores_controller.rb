@@ -87,7 +87,6 @@ class MyscoresController < ApplicationController
   end
 
   def update
-    binding.pry
     @lab = Lab.find_by(id: lab_params[:user][:lab_id])
     @labs = Lab.all
     current_user.update!(lab: @lab)
