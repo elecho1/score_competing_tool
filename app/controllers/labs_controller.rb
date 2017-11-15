@@ -17,7 +17,7 @@ class LabsController < ApplicationController
       end
     end
 
-    # everyone info
+    # every lab info
     @users = User.all
     @labs = Lab.all.order(:id)
     @labs_info = Array.new(@labs.length)

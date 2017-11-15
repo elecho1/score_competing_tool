@@ -66,7 +66,18 @@
 =end
 %>
 
-<div class="form-group">
+  <div class="form-group">
+    <% labs = Lab.all %>
+    <%= f.label "志望研究室を選択してください", class: "control-label col-xs-5 col-sm-5  text-right" %>
+      <% if @user.lab %>
+      　<%= f.select :lab_id, labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true, selected: @user.lab.id%>
+    　<% else %>
+     　 <%= f.select :lab_id, labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true %>
+    　<% end %>
+  </div>
+  <%= devise_error_one(:lab_id) %>
+
+  <div class="form-group">
     <%= f.hidden_field :slack_enabled_flag, value:true %>
   <%= devise_error_one(:slack_enabled_flag) %>
 
@@ -79,14 +90,14 @@
 <% end %>
 
 <% if current_user.slack_enabled_flag %>
-  <hr class="style-one">
+  <hr class="style-four-black">
 
   <h3>アカウント削除</h3>
 
   <p>アカウントを削除しますか？（削除すると元に戻せません） <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 
-  <hr class="style-one">
+  <hr class="style-four-black">
 <% end %>
 
 <%= link_to "戻る", :back, class:"btn btn-info" %>

@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:sign_in, keys:[:provider, :uid, :slack_enabled_flag])
     devise_parameter_sanitizer.permit(:sign_up, keys:[])
-    devise_parameter_sanitizer.permit(:account_update, keys:[:email, :user_key, :user_name, :open_user_name, :open_score, :provider, :uid, :slack_enabled_flag, :department])
+    devise_parameter_sanitizer.permit(:account_update, keys:[:email, :user_key, :user_name, :open_user_name, :open_score, :provider, :uid, :slack_enabled_flag, :department, :lab_id])
   end
 
   def http_basic_authenticate

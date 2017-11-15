@@ -36,6 +36,14 @@
       <td><%= t('view.noo') %></td>
     <% end %>
   </tr>
+  <tr>
+    <td><%= t('attributes.lab') %></td>
+    <% if @user.lab.blank? %>
+      <td><%= "（未登録）"%>
+    <% else %>
+      <td><%= @user.lab.name %></td>
+    <% end %>
+  </tr>
 </table>
 
 <%= link_to "アカウント情報変更", edit_user_registration_path, class: "btn btn-info" %>
