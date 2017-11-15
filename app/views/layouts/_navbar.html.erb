@@ -25,7 +25,8 @@
             <% if current_user.user_score.present?%>
   			  		<li><%= link_to "自分の点数", myscores_path %></li>
               <li><%= link_to "みんなの点数一覧表", table_path %></li>
-							<li><%= link_to "評価の分布", distribution_graph_path %>
+							<li><%= link_to "評価の分布", distribution_graph_path %></li>
+              <li><%= link_to "研究室情報", labs_path %></li>
             <% else %>
               <li><%= link_to "点数登録", new_myscores_path %></li>
             <% end %>
