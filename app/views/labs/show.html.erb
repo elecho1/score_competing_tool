@@ -1,0 +1,70 @@
+<h2>研究室情報</h2>
+
+<h3>志望研究室の情報</h3>
+
+<table class="table table-hover table-striped table-bordered table-bordered-darkgray font-weight-300">
+  <tbody>
+    <tr>
+      <td><strong>第一志望研究室</strong></td>
+      <% if @mylab %>
+        <td><%= @mylab.name %></td>
+      <% else %>
+        <td>未登録</td>
+      <% end %>
+      <td><strong>志望研究室内順位</strong></td>
+      <% if @mylab %>
+        <td><%= @my_standing %>位/<%= @mylab_reordered_applicants.size %>人中</td>
+      <% else %>
+        <td> - 位/ - 人中</td>
+      <% end %>
+      <%# Tweet button %>
+      <% if @mylab %>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私は<%= @mylab.name %>志望者の中で、<%= @mylab_reordered_applicants.size %>人中<%= @my_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+      <% else %>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の志望研究室は未登録です。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+志望研究室の登録・変更はこちらよりどうぞ</br>
+<%= link_to "アカウント情報変更", edit_user_registration_path, class: "btn btn-info" %>
+
+<h3>各研究室の志望人数</h3>
+
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+    <tr class="text-center">
+      <th>研究室名</th>
+      <th>定員（昨年）</th>
+      <th>志望人数</th>
+      <th>研究室リンク</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @labs_info.each do |lab_info| %>
+    <tr>
+      <td class="text-center font-weight-bolder"><%= lab_info['lab'].name %></td>
+      <%# 定員 %>
+      <% if lab_info['lab'].capacity %>
+        <td class="text-center"><%= lab_info['lab'].capacity %></td>
+      <% else %>
+        <td>（未登録）</td>
+      <% end %>
+      <%# 志望人数 %>
+      <td class="text-center font-weight-bolder"><%= lab_info['num'] %></td>
+      <%# リンク %>
+      <% if lab_info['lab'].url %>
+        <td class="text-center font-weight-bolder"><%= lab_info['lab'].url %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+    </tr>
+    <% end %>
+  <tbody>
+</table>
