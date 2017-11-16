@@ -61,14 +61,18 @@
           <% this_score = user_score.scores.find{|score| score.subject_id == subject_id} %>
           <%##### finish #####%>
 
-          <% if this_score.registered %>
-            <% if this_score.nil? %>
-              <td class="font-weight-bolder"> </td>
-            <% else %>
-              <td class="font-weight-bolder"><%= score_evaluate(this_score.value) %></td>
-            <% end %>
+          <% if this_score.nil? %>
+            <td><span>未処理</span></td>
           <% else %>
-            <td><span class="font-weight-bolder">未受講</span></td>
+            <% if this_score.registered %>
+              <% if this_score.nil? %>
+                <td class="font-weight-bolder"> </td>
+              <% else %>
+                <td class="font-weight-bolder"><%= score_evaluate(this_score.value) %></td>
+              <% end %>
+            <% else %>
+              <td><span class="font-weight-bolder">未受講</span></td>
+            <% end %>
           <% end %>
         <% end %>
       <% else %>
