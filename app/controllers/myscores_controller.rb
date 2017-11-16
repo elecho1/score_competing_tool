@@ -73,8 +73,17 @@ class MyscoresController < ApplicationController
   def edit
     @myscore = current_user.user_score
     #@myscore.scores.build
-    #@subjects = Subject.all.order(:id)
     @scores = @myscore.scores.order(:subject_id).includes(:subject)
+    ### create 'score' for newly added subjects
+    subjects = Subject.all.order(:id)
+    subjects.each do |subject|
+      subject_score = @scores.find{|score| score.subject.id == subject.id}
+      if subject_score.nil?
+        temp_score = Score.create(user_score_id: current_user.user_score.id, subject_id: subject.id, registered: false)
+        @scores.push(temp_score)
+      end
+    end
+
     @scores.each_with_index do |s, idx|
       unless s.value? && s.registered? then
         @scores[idx] = Constants::MIJUKOU_VALUE
@@ -221,6 +230,19 @@ class MyscoresController < ApplicationController
     # 各科目の順位
     @scores = @myscore.scores.includes(subject: :scores)
     @subjects = @myscore.subjects.order(:id)
+
+    ### for newly added subjects
+    subjects = Subject.all.order(:id)
+    subjects.each do |subject|
+      subject_score = @scores.find{|score| score.subject.id == subject.id}
+      if subject_score.nil?
+        #binding.pry
+        temp_score = Score.create(user_score_id: current_user.user_score.id, subject_id: subject.id, registered: false)
+        @scores.push(temp_score)
+      end
+    end
+    #binding.pry
+
     @standings = Hash.new
     @scores.each do |score|
       if score.registered
