@@ -47,6 +47,15 @@
   </thead>
 
   <tbody>
+    <tr class="warning">
+      <td class="text-center"><%= "未登録" %></td>
+      <%# 定員 %>
+      <td class="text-center">-</td>
+      <%# 志望人数 %>
+      <td class="text-center"><%= @unregistered_users_num %></td>
+      <%# リンク %>
+      <td class="text-center">-</td>
+    </tr>
     <% @labs_info.each do |lab_info| %>
     <tr>
       <td class="text-center font-weight-bolder"><%= lab_info['lab'].name %></td>
@@ -54,7 +63,7 @@
       <% if lab_info['lab'].capacity %>
         <td class="text-center"><%= lab_info['lab'].capacity %></td>
       <% else %>
-        <td>（未登録）</td>
+        <td>（未追加）</td>
       <% end %>
       <%# 志望人数 %>
       <td class="text-center font-weight-bolder"><%= lab_info['num'] %></td>

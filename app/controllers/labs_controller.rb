@@ -32,7 +32,8 @@ class LabsController < ApplicationController
         this_lab_info = @labs_info.find{|lab_info| lab_info['lab'].id == user.lab_id}
         this_lab_info['num'] += 1
       end
-    end   
+    end
+    @unregistered_users_num = @users.length - @labs_info.inject(0){|sum, lab_info| sum+lab_info['num']}
   end
 
   private
