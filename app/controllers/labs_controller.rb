@@ -33,7 +33,8 @@ class LabsController < ApplicationController
         this_lab_info['num'] += 1
       end
     end
-    @unregistered_users_num = @users.length - @labs_info.inject(0){|sum, lab_info| sum+lab_info['num']}
+    @registered_users_num = @labs_info.inject(0){|sum, lab_info| sum+lab_info['num']}
+    @unregistered_users_num = @users.length - @registered_users_num
   end
 
   private

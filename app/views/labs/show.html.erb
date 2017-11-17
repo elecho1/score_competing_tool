@@ -56,6 +56,15 @@
       <%# リンク %>
       <td class="text-center">-</td>
     </tr>
+    <tr class="warning">
+      <td class="text-center"><%= "登録済" %></td>
+      <%# 定員 %>
+      <td class="text-center">-</td>
+      <%# 志望人数 %>
+      <td class="text-center"><%= @registered_users_num %></td>
+      <%# リンク %>
+      <td class="text-center">-</td>
+    </tr>
     <% @labs_info.each do |lab_info| %>
     <tr>
       <td class="text-center font-weight-bolder"><%= lab_info['lab'].name %></td>
