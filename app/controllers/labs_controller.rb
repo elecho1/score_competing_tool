@@ -18,7 +18,8 @@ class LabsController < ApplicationController
     end
 
     # every lab info
-    @users = User.all
+    #@users = User.all
+    @user_scores = UserScore.all.includes(:user)
     @labs = Lab.all.order(:id)
     @labs_info = Array.new(@labs.length)
     for i in 0..(@labs.length-1) do
@@ -26,15 +27,16 @@ class LabsController < ApplicationController
       @labs_info[i]['lab'] = @labs[i]
       @labs_info[i]['num'] = 0
     end
-    # @labs_applicants = Array.new(@labs.length, 0)
-    @users.each do |user|
-      if user.lab_id
-        this_lab_info = @labs_info.find{|lab_info| lab_info['lab'].id == user.lab_id}
+    #@users.each do |user|
+    @user_scores.each do |user_score|
+      #if user.lab_id
+      if user_score.user.lab_id
+        this_lab_info = @labs_info.find{|lab_info| lab_info['lab'].id == user_score.user.lab_id}
         this_lab_info['num'] += 1
       end
     end
     @registered_users_num = @labs_info.inject(0){|sum, lab_info| sum+lab_info['num']}
-    @unregistered_users_num = @users.length - @registered_users_num
+    @unregistered_users_num = @user_scores.length - @registered_users_num
   end
 
   private
