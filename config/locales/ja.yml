@@ -17,6 +17,7 @@ ja:
     uid: uid
     slack_enabled_flag: Slack認証有効化
     lab: 志望研究室
+    open_lab: 志望研究室の公開の可否
   date:
     abbr_day_names:
     - 日

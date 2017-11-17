@@ -4,7 +4,7 @@ class TablesController < ApplicationController
   before_action :registered_scores?
 
   def show
-    @user_scores = UserScore.all.includes([:user, :scores, :subjects, :semester_scores]).order(total_score: :DESC)
+    @user_scores = UserScore.all.includes([:scores, :subjects, :semester_scores, user: :lab]).order(total_score: :DESC)
     @subjects = Subject.all.order(:id)
 
     @semester_scores = SemesterScore.all

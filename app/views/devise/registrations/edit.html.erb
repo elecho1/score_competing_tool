@@ -78,6 +78,15 @@
   <%= devise_error_one(:lab_id) %>
 
   <div class="form-group">
+    <%= f.label "志望研究室を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :open_lab, true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_lab, false, autofocus: true %>いいえ</br>
+    </div>
+  </div>
+  <%= devise_error_one(:open_lab) %>
+
+  <div class="form-group">
     <%= f.hidden_field :slack_enabled_flag, value:true %>
   <%= devise_error_one(:slack_enabled_flag) %>
 

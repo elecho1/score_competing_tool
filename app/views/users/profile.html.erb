@@ -44,6 +44,14 @@
       <td><%= @user.lab.name %></td>
     <% end %>
   </tr>
+  <tr>
+    <td><%= t('attributes.open_lab') %></td>
+    <% if @user.open_lab %>
+      <td><%= t 'view.yess' %></td>
+    <% else %>
+      <td><%= t('view.noo') %></td>
+    <% end %>
+  </tr>
 </table>
 
 <%= link_to "アカウント情報変更", edit_user_registration_path, class: "btn btn-info" %>

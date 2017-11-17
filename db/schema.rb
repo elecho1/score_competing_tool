@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115115148) do
+ActiveRecord::Schema.define(version: 20171117144304) do
 
   create_table "labs", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20171115115148) do
     t.boolean  "slack_enabled_flag",                 default: false,   null: false
     t.string   "department",             limit: 255, default: "denjo", null: false
     t.integer  "lab_id",                 limit: 4
+    t.boolean  "open_lab",                           default: false,   null: false
   end
 
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
