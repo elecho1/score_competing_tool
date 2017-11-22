@@ -11,14 +11,14 @@
 				<ul class="nav navbar-nav navbar-right">
           <!-- <li><%= link_to "Home", root_path %></li> -->
           <% unless user_signed_in? %>
-          <li><%= link_to image_tag('sign_in_with_slack.png') , user_slack_omniauth_authorize_path , class:"padding-top-0 padding-bottom-0"%></li>
+          <li><%#= link_to image_tag('sign_in_with_slack.png') , user_slack_omniauth_authorize_path , class:"padding-top-0 padding-bottom-0"%></li>
           <%
-=begin
+
           %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
-            <li><%#= link_to "新規登録", new_user_registration_path %></li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
           <%
-=end
+
           %>
           <% else %>
             <% if current_user.user_score.present?%>

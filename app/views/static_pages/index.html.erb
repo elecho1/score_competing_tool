@@ -2,9 +2,9 @@
 
 <% unless user_signed_in? %>
   <div class="text-center">
-    <%#= link_to "ログイン", new_user_session_path, class:"btn btn-info margin-5px" %>
-    <%#= link_to "新規登録", new_user_registration_path, class:"btn btn-default margin-5px" %> 
-    <%= link_to image_tag('sign_in_with_slack.png') , user_slack_omniauth_authorize_path %>
+    <%= link_to "ログイン", new_user_session_path, class:"btn btn-info margin-5px" %>
+    <%= link_to "新規登録", new_user_registration_path, class:"btn btn-default margin-5px" %> 
+    <%#= link_to image_tag('sign_in_with_slack.png') , user_slack_omniauth_authorize_path %>
   </div>
 
 <% else %>
