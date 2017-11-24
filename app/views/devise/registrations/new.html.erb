@@ -1,2 +1,133 @@
+<h2>ユーザー登録（各項目は適当に記入して構いません）</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class:"form-horizontal"}) do |f| %>
+  <%#= devise_error_messages! %>
+
+  <div class="form-group">
+    <div class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :user_key, class: "control-label" %> <br class="visible-xs">（半角英数字）
+    </div>
+    <!-- 必須マーク 
+    <div class="col-xs-1 margin-top-5pt">
+      <span class="label label-danger">必須</span>
+    </div>
+    -->
+    
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :user_key, autofocus: true, placeholder: "ユーザーID", class: "form-control" %>
+      <p class="no-margin">※ユーザーIDは公開されません</p>
+    </div>
+  </div>
+  <%= devise_error_one(:user_key) %>
+
+  <div class="form-group">
+    <div class="col-xs-5 col-sm-5 text-right">
+      <%= f.label "UID", class: "control-label" %> <br class="visible-xs">（ユーザー名と同じ文字列を入力して下さい）
+    </div>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :uid, autofocus: true, placeholder: "UID（再入力）", class: "form-control" %>
+      <p class="no-margin">※UIDは公開されません</p>
+    </div>
+  </div>
+  <%= devise_error_one(:uid) %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :user_name, class: "control-label" %> <br class="visible-xs">（またはニックネーム）
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :user_name, autofocus: true, placeholder: "ニックネーム（匿名可）", class: "form-control col-xs-7 col-sm-5" %>
+    </div>
+  </div>
+  <%= devise_error_one(:user_name) %>
+
+  <div class="form-group">
+    <%= f.label "名前を公開しますか？（現段階では公開しないことをオススメします）", class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-4">
+      <%= f.radio_button :open_user_name, true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_user_name, false, checked: true, autofocus: true %>いいえ
+    </div>
+  </div>
+  <%= devise_error_one(:open_user_name) %>
+
+  <div class="form-group">
+    <%= f.label "メールアドレス(適当で大丈夫です)", class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:email) %>
+
+
+  <%# newly added %>
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :provider, class: "control-label" %> 
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%#= f.text_field :provider, value: session["devise.slack_data"]["provider"], autofocus: true, class: "form-control col-xs-7 col-sm-5", readonly: true %>
+      <%= f.text_field :provider, value: "slack", autofocus: true, class: "form-control col-xs-7 col-sm-5", readonly: true %>
+      <%#= binding.pry %>
+    </div>
+  </div>
+  <%= devise_error_one(:provider) %>
+
+<%
+=begin
+%>
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :uid, class: "control-label" %> 
+    </span>
+    <div class="col-xs-5 col-sm-4">
+      <%= f.text_field :uid, value: session["devise.slack_data"]["uid"], autofocus: true, class: "form-control col-xs-7 col-sm-5", readonly: true %>
+      <%#= binding.pry %>
+    </div>
+  </div>
+  <%= devise_error_one(:provider) %>
+<%
+=end
+%>
+
+  <%# newly added end %>
+
+  <div class="form-group">
+    <span class="col-xs-5 col-sm-5 text-right">
+      <%= f.label :password, class: "control-label" %>
+      <%# if @minimum_password_length %>
+      <% if @validatable %>
+      <br>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
+      <% end %>
+    </span>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:password) %>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, class: "control-label col-xs-5 col-sm-5 text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+  <%= devise_error_one(:password_confirmation) %>
+
+  <div class="form-group">
+    <%= f.label "点数を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :open_score, true, checked: true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_score, false, autofocus: true %>いいえ</br>
+    </div>
+  </div>
+  <%= devise_error_one(:open_score) %>
+
+  <div class="form-group">
+    <span class="col-xs-6 col-xs-offset-5 col-sm-5">
+      <%= f.submit "登録" %>
+    </span>
+  </div>
+<% end %>
+
 <%#= render "devise/shared/links" %>
-<%= render "static_pages/sign_in_with_slack"%>
