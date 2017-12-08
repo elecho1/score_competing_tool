@@ -124,6 +124,39 @@
   <%= devise_error_one(:open_score) %>
 
   <div class="form-group">
+    <%= f.label "学科を登録してください。", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :department, "denjo", checked: true, autofocus: true %>電情</br>
+      <%= f.radio_button :department, "denden", autofocus: true %>電電</br>
+    </div>
+  </div>
+  <%= devise_error_one(:department) %>
+
+  <div class="form-group">
+    <% labs = Lab.all %>
+    <%= f.label "志望研究室を選択してください", class: "control-label col-xs-5 col-sm-5  text-right" %>
+      <% if @user.lab %>
+      　<%= f.select :lab_id, labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true, selected: @user.lab.id%>
+    　<% else %>
+     　 <%= f.select :lab_id, labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true %>
+    　<% end %>
+  </div>
+  <%= devise_error_one(:lab_id) %>
+
+  <div class="form-group">
+    <%= f.label "志望研究室を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <div class="col-xs-6 col-sm-5">
+      <%= f.radio_button :open_lab, true, autofocus: true %>はい</br>
+      <%= f.radio_button :open_lab, false, autofocus: true %>いいえ</br>
+    </div>
+  </div>
+  <%= devise_error_one(:open_lab) %>
+
+  <div class="form-group">
+    <%= f.hidden_field :slack_enabled_flag, value:true %>
+  <%= devise_error_one(:slack_enabled_flag) %>
+
+  <div class="form-group">
     <span class="col-xs-6 col-xs-offset-5 col-sm-5">
       <%= f.submit "登録" %>
     </span>

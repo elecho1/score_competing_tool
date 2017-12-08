@@ -1,13 +1,14 @@
 <h2>アカウント情報</h2>
 <table class="table table-hover table-striped table-bordered table-bordered-darkgray">
   <tr>
-    <td><%= t('attributes.user_key') %> </br>(※ユーザーIDは公開されません）</td>
-    <td><%= @user.user_key %></td>
-  </tr>
-  <tr>
     <td><%= t('attributes.user_name') %></td>
-    <td><%= @user.user_name %></td>
+    <% if @user.user_name.blank? %>
+      <td><%= "（未登録）"%>
+    <% else %>
+      <td><%= @user.user_name %></td>
+    <% end %>
   </tr>
+
   <tr>
     <td><%= t('attributes.department') %></td>
     <% if @user.department.eql?("denjo") %>
@@ -18,6 +19,7 @@
       <td><%= t('view.oth_dep') %></td>
     <% end %>
   </tr>
+
   <tr>
     <td><%= t('attributes.open_user_name') %></td>
     <% if @user.open_user_name %>
@@ -27,14 +29,7 @@
     <% end %>
   </tr>
   <tr>
-    <td><%= t('attributes.email') %></td>
-    <td><%= @user.email %></td>
-  </tr>
-  <tr>
-    <td><%= t('attributes.password') %></td>
-    <td>********</td>
-  </tr>
-  <td><%= t('attributes.open_score') %></td>
+    <td><%= t('attributes.open_score') %></td>
     <% if @user.open_score %>
       <td><%= t 'view.yess' %></td>
     <% else %>
