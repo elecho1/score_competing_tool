@@ -65,7 +65,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: 'eeic-scores.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'eeic-scores-demo.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -92,5 +92,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # for google-analytics-rails
-  GA.tracker = "UA-96633173-1"
+  GA.tracker = "UA-110947439-1"
 end
