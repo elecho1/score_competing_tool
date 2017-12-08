@@ -90,6 +90,9 @@
   </div>
   <%= devise_error_one(:open_lab) %>
 
+<%
+=begin
+%>
   <div class="form-group">
     <%= f.label :current_password, class: "control-label col-xs-5 col-sm-5  text-right" %> <!-- <i>(we need your current password to confirm your changes)</i> -->
     <div class="col-xs-6 col-sm-5">
@@ -97,10 +100,13 @@
     </div>
   </div>
   <%= devise_error_one(:current_password) %>
+<% 
+=end
+%>
 
   <div class="form-group">
     <span class="col-xs-5 col-sm-5 text-right">
-      <%= f.label :password, "新しいパスワード", class: "control-label" %> <br>(パスワードを変更しない場合は記入しないで下さい）
+      <%= f.label :password, "新しいパスワード（6文字以上）", class: "control-label" %> <br>(パスワードを変更しない場合は記入しないで下さい）
       <%# if @minimum_password_length %>
     <% if @validatable %>
       <br />
