@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: score_competing_tool_demo_production
-  username: score_competing_tool
-  password: <%= ENV['SCORE_COMPETING_TOOL_DATABASE_PASSWORD'] %>
+  username: score_competing_tool_demo
+  password: <%= ENV['SCORE_COMPETING_TOOL_DEMO_DATABASE_PASSWORD'] %>
