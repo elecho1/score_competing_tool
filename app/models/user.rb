@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   belongs_to :lab
 
   #validation
-  #validates :user_key, presence: true, uniqueness: true,
+  validates :user_key, presence: true, uniqueness: true,
+  validates :uid, presence: true, uniqueness: true,
   #format: {with: /\w*\z/},
   #length: {minimum: 2, maximum: 50}
   validates :open_user_name, inclusion: {in: [true, false], message: "を選択して下さい"}
