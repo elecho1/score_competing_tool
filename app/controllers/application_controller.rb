@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     #   user_params.permit(:email, :user_key, :user_name, :open_user_name, :open_score)
     # end
 
-    devise_parameter_sanitizer.permit(:sign_in, keys:[:provider, :uid, :slack_enabled_flag])
+    devise_parameter_sanitizer.permit(:sign_in, keys:[:user_key])
     devise_parameter_sanitizer.permit(:sign_up, keys:[:email, :user_key, :user_name, :open_user_name, :open_score, :provider, :uid, :slack_enabled_flag, :department, :lab_id, :open_lab])
     devise_parameter_sanitizer.permit(:account_update, keys:[:email, :user_key, :user_name, :open_user_name, :open_score, :provider, :uid, :slack_enabled_flag, :department, :lab_id, :open_lab])
   end
