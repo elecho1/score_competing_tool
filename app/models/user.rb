@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :open_user_name, inclusion: {in: [true, false], message: "を選択して下さい"}
   validates :open_score, inclusion: {in: [true, false], message: "を選択して下さい"}
   validates :user_name, length: {maximum: 50, allow_blank: true}
-  validates :lab_id, numericality: {only_integer: true}, inclusion: {in: Lab.all.map{|lab| lab.id}}, allow_nil: true
+  # validates :lab_id, numericality: {only_integer: true}, inclusion: {in: Lab.all.map{|lab| lab.id}}, allow_nil: true
 
   def email_required?
     false
