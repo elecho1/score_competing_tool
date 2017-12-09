@@ -13,7 +13,11 @@ class TablesController < ApplicationController
     @my_total_score = UserScore.find{|data| data.user_id == current_user.id}.total_score
     @user_scores_max = @user_scores[0].total_score
     @user_scores_min = @user_scores[@user_scores.length - 1].total_score
-    @label_interval = (@user_scores_max -   @user_scores_min) / 10
+    if @user_scores_max == @user_scores_min
+      @label_interval = 1
+    else
+      @label_interval = (@user_scores_max -   @user_scores_min) / 10
+    end
     @user_scores_number = @user_scores.map do |data|
       data.total_score
     end
