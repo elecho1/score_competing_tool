@@ -7,8 +7,8 @@ class LabsController < ApplicationController
     # self info
     @mylab = current_user.lab
     if @mylab
-      mylab_applicants = @mylab.users.includes(:user_score)
-      mylab_applicants.delete_if{|user| user.user_score.blank?}
+      mylab_applicants_rel = @mylab.users.includes(:user_score)
+      mylab_applicants = mylab_applicants_rel.select{|user| user.user_score}
       @mylab_reordered_applicants = mylab_applicants.sort{|a, b| b.user_score.total_score <=> a.user_score.total_score}
       @my_standing = 1
       @mylab_reordered_applicants.each do |applicant|
