@@ -1,1 +1,6 @@
-Lab.create(name: 'デジタルハリウッド大', capacity: 1)
+Lab.find_by(name: '伊庭 長谷川研').update(name: '伊庭研', capacity: 2)
+Lab.find_by(name: '相田 矢谷研').update(name: '相田研', capacity: 2)
+Lab.find_by(name: '浅田 名倉 飯塚研').update(name: '名倉 飯塚研', capacity: 2)
+Lab.find_by(name: '廣瀬研').update(name: '廣瀬 夏秋研')
+Lab.create(name: '長谷川研', capacity: 2)
+Lab.create(name: '矢谷研', capacity: 2)

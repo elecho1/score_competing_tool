@@ -1,0 +1,1 @@
+Lab.create(name: 'デジタルハリウッド大', capacity: 1)
