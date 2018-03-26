@@ -7,7 +7,7 @@
     <% if semester != 0 %>
     <th class="thead-th">セメスター別点数</th>
     <% end %>
-    <th class="thead-th">志望研究室</th>
+    <th class="thead-th">内定研究室</th>
     <% subjects.each do |subject| %>
       <th class="thead-th"><%= subject.key %> </th>
     <% end %>
@@ -48,7 +48,7 @@
         <% end %>
       <% end %>
 
-      <%# 志望研究室 %>
+      <%# 内定研究室 %>
       <% if user_score.user.open_lab %>
         <% if user_score.user.lab_id %>
           <td class="text-center"><%= user_score.user.lab.name %></td>

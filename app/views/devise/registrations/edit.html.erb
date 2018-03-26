@@ -68,7 +68,7 @@
 
   <div class="form-group">
     <% labs = Lab.all %>
-    <%= f.label "志望研究室を選択してください", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <%= f.label "内定研究室を選択してください", class: "control-label col-xs-5 col-sm-5  text-right" %>
       <% if @user.lab %>
       　<%= f.select :lab_id, labs.map { |lab| [ lab.name, lab.id ] }, include_blank: true, selected: @user.lab.id%>
     　<% else %>
@@ -78,7 +78,7 @@
   <%= devise_error_one(:lab_id) %>
 
   <div class="form-group">
-    <%= f.label "志望研究室を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
+    <%= f.label "内定研究室を一覧表に開示しますか？", class: "control-label col-xs-5 col-sm-5  text-right" %>
     <div class="col-xs-6 col-sm-5">
       <%= f.radio_button :open_lab, true, autofocus: true %>はい</br>
       <%= f.radio_button :open_lab, false, autofocus: true %>いいえ</br>

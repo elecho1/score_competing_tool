@@ -7,18 +7,18 @@
   <li>研究室配属は<a href="https://wiki.eeic.jp/index.php/EEIC2014/%E5%8D%92%E8%AB%96%E9%85%8D%E5%B1%9E" target="_blank">EEIC2014のWikiのページ</a>が詳しいので、よく読んでおきましょう。</li>
 </ul>
 
-<h3>志望研究室の情報</h3>
+<h3>内定研究室の情報</h3>
 
 <table class="table table-hover table-striped table-bordered table-bordered-darkgray font-weight-300">
   <tbody>
     <tr>
-      <td><strong>第一志望研究室</strong></td>
+      <td><strong>内定研究室</strong></td>
       <% if @mylab %>
         <td><%= @mylab.name %></td>
       <% else %>
         <td>未登録</td>
       <% end %>
-      <td><strong>志望研究室内順位</strong></td>
+      <td><strong>内定研究室内順位</strong></td>
       <% if @mylab %>
         <td><%= @my_standing %>位/<%= @mylab_reordered_applicants.size %>人中</td>
       <% else %>
@@ -27,28 +27,28 @@
       <%# Tweet button %>
       <% if @mylab %>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私は<%= @mylab.name %>志望者の中で、<%= @mylab_reordered_applicants.size %>人中<%= @my_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私は<%= @mylab.name %>内定者の中で、<%= @mylab_reordered_applicants.size %>人中<%= @my_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
       <% else %>
       <td>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の志望研究室は未登録です。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の内定研究室は未登録です。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
       <% end %>
     </tr>
   </tbody>
 </table>
 
-志望研究室の登録・変更はこちらよりどうぞ</br>
+内定研究室の登録・変更はこちらよりどうぞ</br>
 <%= link_to "アカウント情報変更", edit_user_registration_path, class: "btn btn-info" %>
 
-<h3>各研究室の志望人数</h3>
+<h3>各研究室の内定人数</h3>
 
 <table class="table table-hover table-striped table-bordered">
   <thead>
     <tr class="text-center">
       <th>研究室名</th>
       <th>第一段階定数（2018）／（第二は第一+1または+2）</th>
-      <th>志望人数</th>
+      <th>内定人数</th>
       <th>研究室リンク</th>
     </tr>
   </thead>
@@ -58,7 +58,7 @@
       <td class="text-center"><%= "未登録" %></td>
       <%# 定員 %>
       <td class="text-center">-</td>
-      <%# 志望人数 %>
+      <%# 内定人数 %>
       <td class="text-center"><%= @unregistered_users_num %></td>
       <%# リンク %>
       <td class="text-center">-</td>
@@ -67,7 +67,7 @@
       <td class="text-center"><%= "登録済" %></td>
       <%# 定員 %>
       <td class="text-center">-</td>
-      <%# 志望人数 %>
+      <%# 内定人数 %>
       <td class="text-center"><%= @registered_users_num %></td>
       <%# リンク %>
       <td class="text-center">-</td>
@@ -81,7 +81,7 @@
       <% else %>
         <td>（未追加）</td>
       <% end %>
-      <%# 志望人数 %>
+      <%# 内定人数 %>
       <td class="text-center font-weight-bolder"><%= lab_info['num'] %></td>
       <%# リンク %>
       <% if lab_info['lab'].url %>
