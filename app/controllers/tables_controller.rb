@@ -53,6 +53,12 @@ class TablesController < ApplicationController
     @subject_ids_3S = @subjects_3S.map do |subject|
       subject.id
     end
+
+    @user_scores_3A = @user_scores.sort{|a, b| b.semester_scores.find{|sem| sem.semester == 6}.total_score <=> a.semester_scores.find{|sem| sem.semester == 6}.total_score}
+    @subjects_3A = @subjects.select{|subject| subject.semester == 6}
+    @subject_ids_3A = @subjects_3A.map do |subject|
+      subject.id
+    end
   end
 
   private

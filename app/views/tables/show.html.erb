@@ -31,6 +31,7 @@
   <li class="active"><a href="#semesterall" data-toggle="tab"><b>すべての学期</b></a></li>
   <li><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
   <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
+  <li><a href="#semester6" data-toggle="tab"><b>3Aセメスター</b></a><li>
 </ul>
 
 <div class="tab-content">
@@ -45,5 +46,9 @@
   <!-- 3S -->
   <div class="tab-pane" id="semester5">
     <%= render 'each_table', subjects: @subjects_3S, subject_ids: @subject_ids_3S, user_scores: @user_scores_3S, semester: 5 %>
+  </div>
+  <!-- 3A -->
+  <div class="tab-pane" id="semester6">
+    <%= render 'each_table', subjects: @subjects_3A, subject_ids: @subject_ids_3A, user_scores: @user_scores_3A, semester: 6 %>
   </div>
 </div>

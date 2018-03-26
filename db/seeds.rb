@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-### 3S other
+### 3A other
 Subject.create(key: "計算論", weight: "2", semester: 6, subject_type: "denjo")
 Subject.create(key: "制御工学第二", weight: "2", semester: 6, subject_type: "denden")
 Subject.create(key: "映像メディア工学", weight: "2", semester: 6, subject_type: "denjo")
