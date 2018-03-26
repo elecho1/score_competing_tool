@@ -21,6 +21,7 @@
 <ul class="nav nav-tabs">
   <li class="active"><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
   <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
+  <li><a href="#semester6" data-toggle="tab"><b>3Aセメスター</b></a><li>
 </ul>
 
 <div class="tab-content">
@@ -36,6 +37,14 @@
   <div class="tab-pane" id="semester5">
     <div class="panel-group">
       <% @subjects.where(semester:5).each do |subject| %> 
+        <%= render 'each_subject', subject: subject%>
+      <% end %>
+    </div>
+  </div>
+  <!-- 3A -->
+  <div class="tab-pane" id="semester6">
+    <div class="panel-group">
+      <% @subjects.where(semester:6).each do |subject| %> 
         <%= render 'each_subject', subject: subject%>
       <% end %>
     </div>
