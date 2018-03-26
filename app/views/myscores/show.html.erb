@@ -61,6 +61,25 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3SセメGPAは<%= @sem5_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem5_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </td>
     </tr>
+    <tr>
+      <td><strong>3Aセメ総合点数</strong></td>
+      <td><%= @sem6_total_score %>点</td>
+      <td><strong>3Aセメ総合点数順位</strong></td>
+      <%# binding.pry %>
+      <td><%= @sem6_total_score_standing %>位/<%= @user_scores.size %>人中</td>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3Aセメ総合点数は<%= @sem6_total_score %>点で、順位は<%= @user_scores.count %>人中<%= @sem6_total_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>3AセメGPA</strong></td>
+      <td><%= @sem6_gpa %></td>
+      <td><strong>3AセメGPA順位</strong></td>
+      <td><%= @sem6_gpa_standing %>位/<%= @user_scores.count %>人中</td>
+      <td>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="私の3AセメGPAは<%= @sem6_gpa %>で、順位は<%= @user_scores.count %>人中<%= @sem6_gpa_standing %>位でした。（<%= Time.now %>現在）" data-hashtags="eeic2017">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -81,6 +100,7 @@
 <ul class="nav nav-tabs">
   <li class="active"><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
   <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
+  <li><a href="#semester6" data-toggle="tab"><b>3Aセメスター</b></a><li>
 </ul>
 
 <div class="tab-content">
@@ -118,6 +138,25 @@
 
       <tbody>
       <% @scores.joins(:subject).where("subjects.semester = ?", 5).each do |score| %>
+        <%= render 'show_each_score', score:score %>
+      <% end %>
+      <tbody>
+    </table>
+  </div>
+  <!-- 3A -->
+  <div class="tab-pane" id="semester6">
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+      <tr class="text-center">
+        <th>科目名</th>
+        <th>評価</th>
+        <th>順位</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @scores.joins(:subject).where("subjects.semester = ?", 6).each do |score| %>
         <%= render 'show_each_score', score:score %>
       <% end %>
       <tbody>

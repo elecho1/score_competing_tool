@@ -25,6 +25,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#semester4" data-toggle="tab"><b>2Aセメスター</b></a></li>
     <li><a href="#semester5" data-toggle="tab"><b>3Sセメスター</b></a><li>
+    <li><a href="#semester6" data-toggle="tab"><b>3Aセメスター</b></a><li>
   </ul>
 
   <div class="tab-content">
@@ -83,6 +84,37 @@
         </div>
       </div>
       </div>
+      <br>
+      <h3>次に上のタブから3Aセメスターの成績を登録しましょう。</h3>
+    </div>
+    <div class="tab-pane" id="semester6">
+      <%# @subjects.where(semester:6).each do |subject| %>
+      <% @subjects.where(semester: 6).where(subject_type: ["all", current_user.department, "other"]).each do |subject| %>
+        <!--各科目の記入欄-->
+        <%= f.fields_for :scores do |s| %>
+          <%= render 'new_each_form', subject: subject, s:s %>
+        <% end %>
+      <% end %>
+
+
+      <div class="panel-group">
+      <div class="panel-default">　
+        <div class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" href="#subject3">
+          その他の科目を表示
+          </a></h4>
+        </div>
+        <div id="subject3" class="row panel-collapse collapse">
+          <% @subjects.where(semester: 6).where.not(subject_type: ["all", current_user.department, "other"]).each do |subject| %>
+            <!--各科目の記入欄-->
+            <%= f.fields_for :scores do |s| %>
+              <%= render 'new_each_form', subject: subject, s:s %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <br>
 
       <%= f.submit "点数登録" %>
     </div>
